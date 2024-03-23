@@ -1,16 +1,13 @@
 <script lang="ts">
+  import type { SuccessCriteria } from "../../types/wcag";
   import { onMount } from "svelte";
   import Card from "./Card.svelte";
-  type Criterion = {
-    ref_id: number;
-    title: string;
-    level: string;
-    description: string;
-    url: string;
-  };
-  let criteria: Array<Criterion> = [];
-  let filteredCriteria: Array<Criterion> = [];
+
+  let criteria: Array<SuccessCriteria> = [];
+  let filteredCriteria: Array<SuccessCriteria> = [];
+  let sortedCriteria: Array<SuccessCriteria> = [];
   let level = "";
+  let sort = "id";
 
   onMount(async function () {
     const response = await fetch("/api/wcag.json");
@@ -20,6 +17,14 @@
   $: filteredCriteria = level
     ? criteria.filter((criterion) => criterion.level === level)
     : criteria;
+
+  $: sortedCriteria = [...filteredCriteria].sort((a, b) => {
+    if (sort === "id") {
+      return Number(a.ref_id) - Number(b.ref_id);
+    } else {
+      return b.percentageOfTotalIssues - a.percentageOfTotalIssues;
+    }
+  });
 </script>
 
 <h2>Success Criteria ({filteredCriteria.length})</h2>
@@ -27,15 +32,21 @@
 <div class="filter">
   <label for="level">Level </label>
   <select id="level" bind:value={level}>
-    <option value="">All</option>
+    <option value="" selected>All</option>
     <option value="A">A</option>
     <option value="AA">AA</option>
     <option value="AAA">AAA</option>
   </select>
+
+  <label for="sort">Sort by </label>
+  <select id="sort" bind:value={sort}>
+    <option value="id" selected>Id</option>
+    <option value="percentage">Percentage of total issues</option>
+  </select>
 </div>
 
 <div class="grid">
-  {#each filteredCriteria as criterion}
+  {#each sortedCriteria as criterion}
     <Card
       {criterion}
       backgroundColor={criterion.level === "A"
@@ -55,7 +66,7 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
     gap: 0.7rem;
   }
 </style>

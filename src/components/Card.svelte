@@ -1,5 +1,6 @@
 <script lang="ts">
-  export let criterion;
+  import type { SuccessCriteria } from "../../types/wcag";
+  export let criterion: SuccessCriteria;
   export let backgroundColor: string = "#f0f0f0";
 </script>
 
@@ -10,6 +11,13 @@
       {criterion.title}
     </a>
   </h3>
+  {#if criterion.percentageOfTotalIssues > 0}
+    <div>{criterion.percentageOfTotalIssues}%</div>
+    <div
+      class="percentage-bar"
+      style:width={`${criterion.percentageOfTotalIssues}%`}
+    ></div>
+  {/if}
   <!-- <div>{criterion.level}</div> -->
 </div>
 
@@ -20,6 +28,7 @@
     flex-direction: column;
     aspect-ratio: 1;
     overflow: hidden;
+    position: relative;
   }
 
   h3 {
@@ -40,5 +49,13 @@
   .ref-id {
     font-size: 0.8rem;
     margin-block-end: 0.3rem;
+  }
+
+  .percentage-bar {
+    height: 0.3rem;
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 </style>

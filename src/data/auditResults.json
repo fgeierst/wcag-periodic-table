@@ -1,0 +1,292 @@
+{
+  "auditResultsDeque2021": [
+    {
+      "ref_id": "1.1.1",
+      "title": "Non-Text Content",
+      "AutomatedIssues": 16014,
+      "ManualIssues": 7687
+    },
+    {
+      "ref_id": "1.2.1",
+      "title": "Audio-only and Video-only (Prerecorded)",
+      "AutomatedIssues": 0,
+      "ManualIssues": 140
+    },
+    {
+      "ref_id": "1.2.2",
+      "title": "Captions (Prerecorded)",
+      "AutomatedIssues": 0,
+      "ManualIssues": 212
+    },
+    {
+      "ref_id": "1.2.3",
+      "title": "Audio Description or Media Alternative (Prerecorded)",
+      "AutomatedIssues": 0,
+      "ManualIssues": 120
+    },
+    {
+      "ref_id": "1.2.4",
+      "title": "Captions (Live)",
+      "AutomatedIssues": 0,
+      "ManualIssues": 7
+    },
+    {
+      "ref_id": "1.2.5",
+      "title": "Audio Description (Prerecorded)",
+      "AutomatedIssues": 0,
+      "ManualIssues": 98
+    },
+    {
+      "ref_id": "1.3.1",
+      "title": "Info and Relationships",
+      "AutomatedIssues": 16432,
+      "ManualIssues": 19950
+    },
+    {
+      "ref_id": "1.3.2",
+      "title": "Meaningful Sequence",
+      "AutomatedIssues": 0,
+      "ManualIssues": 3313
+    },
+    {
+      "ref_id": "1.3.3",
+      "title": "Sensory Characteristics",
+      "AutomatedIssues": 0,
+      "ManualIssues": 570
+    },
+    {
+      "ref_id": "1.3.4",
+      "title": "Orientation",
+      "AutomatedIssues": 0,
+      "ManualIssues": 44
+    },
+    {
+      "ref_id": "1.3.5",
+      "title": "Identify Input Purpose",
+      "AutomatedIssues": 132,
+      "ManualIssues": 730
+    },
+    {
+      "ref_id": "1.4.1",
+      "title": "Use of Color",
+      "AutomatedIssues": 452,
+      "ManualIssues": 3261
+    },
+    {
+      "ref_id": "1.4.2",
+      "title": "Audio Control",
+      "AutomatedIssues": 1668,
+      "ManualIssues": 2099
+    },
+    {
+      "ref_id": "1.4.3",
+      "title": "Contrast (Minimum)",
+      "AutomatedIssues": 73733,
+      "ManualIssues": 14981
+    },
+    {
+      "ref_id": "1.4.4",
+      "title": "Resize Text",
+      "AutomatedIssues": 0,
+      "ManualIssues": 3
+    },
+    {
+      "ref_id": "1.4.5",
+      "title": "Images of Text",
+      "AutomatedIssues": 10,
+      "ManualIssues": 1778
+    },
+    {
+      "ref_id": "1.4.10",
+      "title": "Reflow",
+      "AutomatedIssues": 0,
+      "ManualIssues": 1181
+    },
+    {
+      "ref_id": "1.4.11",
+      "title": "Non-text Contrast",
+      "AutomatedIssues": 0,
+      "ManualIssues": 4539
+    },
+    {
+      "ref_id": "1.4.12",
+      "title": "Text Spacing",
+      "AutomatedIssues": 15,
+      "ManualIssues": 657
+    },
+    {
+      "ref_id": "1.4.13",
+      "title": "Content on Hover or Focus",
+      "AutomatedIssues": 0,
+      "ManualIssues": 685
+    },
+    {
+      "ref_id": "2.1.1",
+      "title": "Keyboard",
+      "AutomatedIssues": 234,
+      "ManualIssues": 9178
+    },
+    {
+      "ref_id": "2.1.2",
+      "title": "No Keyboard Trap",
+      "AutomatedIssues": 0,
+      "ManualIssues": 377
+    },
+    {
+      "ref_id": "2.1.4",
+      "title": "Character Key Shortcuts",
+      "AutomatedIssues": 0,
+      "ManualIssues": 3
+    },
+    {
+      "ref_id": "2.2.1",
+      "title": "Timing Adjustable",
+      "AutomatedIssues": 22,
+      "ManualIssues": 381
+    },
+    {
+      "ref_id": "2.2.2",
+      "title": "Pause, Stop, Hide",
+      "AutomatedIssues": 0,
+      "ManualIssues": 560
+    },
+    {
+      "ref_id": "2.3.1",
+      "title": "Three Flashes or Below Threshold",
+      "AutomatedIssues": 0,
+      "ManualIssues": 3
+    },
+    {
+      "ref_id": "2.4.1",
+      "title": "Bypass Blocks",
+      "AutomatedIssues": 2001,
+      "ManualIssues": 532
+    },
+    {
+      "ref_id": "2.4.2",
+      "title": "Page Titled",
+      "AutomatedIssues": 249,
+      "ManualIssues": 1962
+    },
+    {
+      "ref_id": "2.4.3",
+      "title": "Focus Order",
+      "AutomatedIssues": 0,
+      "ManualIssues": 9553
+    },
+    {
+      "ref_id": "2.4.4",
+      "title": "Link Purpose (In Context)",
+      "AutomatedIssues": 0,
+      "ManualIssues": 1376
+    },
+    {
+      "ref_id": "2.4.5",
+      "title": "Multiple Ways",
+      "AutomatedIssues": 0,
+      "ManualIssues": 181
+    },
+    {
+      "ref_id": "2.4.6",
+      "title": "Headings and Labels",
+      "AutomatedIssues": 0,
+      "ManualIssues": 1228
+    },
+    {
+      "ref_id": "2.4.7",
+      "title": "Focus Visible",
+      "AutomatedIssues": 0,
+      "ManualIssues": 7312
+    },
+    {
+      "ref_id": "2.5.1",
+      "title": "Pointer Gestures",
+      "AutomatedIssues": 0,
+      "ManualIssues": 7
+    },
+    {
+      "ref_id": "2.5.3",
+      "title": "Label in Name",
+      "AutomatedIssues": 32,
+      "ManualIssues": 495
+    },
+    {
+      "ref_id": "3.1.1",
+      "title": "Language of Page",
+      "AutomatedIssues": 1995,
+      "ManualIssues": 178
+    },
+    {
+      "ref_id": "3.1.2",
+      "title": "Language of Parts",
+      "AutomatedIssues": 0,
+      "ManualIssues": 317
+    },
+    {
+      "ref_id": "3.2.1",
+      "title": "On Focus",
+      "AutomatedIssues": 0,
+      "ManualIssues": 167
+    },
+    {
+      "ref_id": "3.2.2",
+      "title": "On Input",
+      "AutomatedIssues": 0,
+      "ManualIssues": 281
+    },
+    {
+      "ref_id": "3.2.3",
+      "title": "Consistent Navigation",
+      "AutomatedIssues": 0,
+      "ManualIssues": 17
+    },
+    {
+      "ref_id": "3.2.4",
+      "title": "Consistent Identification",
+      "AutomatedIssues": 0,
+      "ManualIssues": 10
+    },
+    {
+      "ref_id": "3.3.1",
+      "title": "Error Identification",
+      "AutomatedIssues": 0,
+      "ManualIssues": 668
+    },
+    {
+      "ref_id": "3.3.2",
+      "title": "Labels or Instructions",
+      "AutomatedIssues": 518,
+      "ManualIssues": 2019
+    },
+    {
+      "ref_id": "3.3.3",
+      "title": "Error Suggestion",
+      "AutomatedIssues": 0,
+      "ManualIssues": 142
+    },
+    {
+      "ref_id": "3.3.4",
+      "title": "Error Prevention (Legal, Financial, Data)",
+      "AutomatedIssues": 0,
+      "ManualIssues": 15
+    },
+    {
+      "ref_id": "4.1.1",
+      "title": "Parsing",
+      "AutomatedIssues": 31137,
+      "ManualIssues": 3351
+    },
+    {
+      "ref_id": "4.1.2",
+      "title": "Name, Role, Value",
+      "AutomatedIssues": 26276,
+      "ManualIssues": 22011
+    },
+    {
+      "ref_id": "4.1.3",
+      "title": "Status Message",
+      "AutomatedIssues": 0,
+      "ManualIssues": 1337
+    }
+  ]
+}
