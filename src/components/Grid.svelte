@@ -8,7 +8,7 @@
   let filteredCriteria: Array<SuccessCriteria> = [];
   let sortedCriteria: Array<SuccessCriteria> = [];
   let selectedLevels: Array<string> = ["A", "AA"];
-  let sortKey: SortKey;
+  let sortKey: SortKey = SortKey.LEVEL;
 
   onMount(async function () {
     const response = await fetch("/api/wcag.json");

@@ -1,8 +1,8 @@
 import type { SuccessCriteria } from "../../types/wcag";
 
 export enum SortKey {
-  ID = "Id",
   LEVEL = "Level",
+  ID = "Id",
   MOSTCOMMON = "Most common issues",
   AUTOMATEDTESTS = "Has automated tests",
 }
