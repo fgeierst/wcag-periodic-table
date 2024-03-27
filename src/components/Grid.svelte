@@ -27,11 +27,11 @@
   });
 </script>
 
-<h2>Success Criteria ({filteredCriteria.length})</h2>
+<h1 class="text-lg font-bold">Success Criteria ({filteredCriteria.length})</h1>
 
-<div class="filter">
+<div class="my-3">
   <label for="level">Level </label>
-  <select id="level" bind:value={level}>
+  <select id="level" bind:value={level} class="border">
     <option value="" selected>All</option>
     <option value="A">A</option>
     <option value="AA">AA</option>
@@ -39,13 +39,13 @@
   </select>
 
   <label for="sort">Sort by </label>
-  <select id="sort" bind:value={sort}>
+  <select id="sort" bind:value={sort} class="border">
     <option value="id" selected>Id</option>
     <option value="percentage">Most common issues</option>
   </select>
 </div>
 
-<div class="grid">
+<div class="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
   {#each sortedCriteria as criterion}
     <Card
       {criterion}
@@ -59,14 +59,3 @@
     />
   {/each}
 </div>
-
-<style>
-  .filter {
-    margin-block: 1rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
-    gap: 0.7rem;
-  }
-</style>

@@ -19,11 +19,6 @@
 </div>
 
 <style>
-  .break-all {
-    overflow-wrap: normal;
-    hyphens: auto;
-  }
-
   .card {
     padding: 0.5rem;
     display: flex;
