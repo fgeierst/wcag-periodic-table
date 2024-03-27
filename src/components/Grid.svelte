@@ -7,7 +7,7 @@
   let criteria: Array<SuccessCriteria> = [];
   let filteredCriteria: Array<SuccessCriteria> = [];
   let sortedCriteria: Array<SuccessCriteria> = [];
-  let selectedLevels: Array<string> = ["A", "AA", "AAA"];
+  let selectedLevels: Array<string> = ["A", "AA"];
   let sortKey: SortKey;
 
   onMount(async function () {
