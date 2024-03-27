@@ -1,13 +1,14 @@
 <script lang="ts">
   import type { SuccessCriteria } from "../../types/wcag";
   import { onMount } from "svelte";
+  import { sortCritaria, SortKey } from "../utils/sorting.ts";
   import Card from "./Card.svelte";
 
   let criteria: Array<SuccessCriteria> = [];
   let filteredCriteria: Array<SuccessCriteria> = [];
   let sortedCriteria: Array<SuccessCriteria> = [];
   let level = "";
-  let sort = "id";
+  let sortKey: SortKey;
 
   onMount(async function () {
     const response = await fetch("/api/wcag.json");
@@ -18,13 +19,7 @@
     ? criteria.filter((criterion) => criterion.level === level)
     : criteria;
 
-  $: sortedCriteria = [...filteredCriteria].sort((a, b) => {
-    if (sort === "id") {
-      return Number(a.ref_id) - Number(b.ref_id);
-    } else {
-      return b.percentageOfTotalIssues - a.percentageOfTotalIssues;
-    }
-  });
+  $: sortedCriteria = sortCritaria(filteredCriteria, sortKey);
 </script>
 
 <h1 class="text-lg font-bold">Success Criteria ({filteredCriteria.length})</h1>
@@ -39,9 +34,10 @@
   </select>
 
   <label for="sort">Sort by </label>
-  <select id="sort" bind:value={sort} class="border">
+  <select id="sort" bind:value={sortKey} class="border">
     <option value="id" selected>Id</option>
-    <option value="percentage">Most common issues</option>
+    <option value="level">Level</option>
+    <option value="mostcommon">Most common issues</option>
   </select>
 </div>
 
