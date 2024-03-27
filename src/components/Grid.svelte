@@ -42,9 +42,9 @@
   <div>
     <label for="sort">Sort by</label>
     <select id="sort" bind:value={sortKey} class="border">
-      <option value="id" selected>Id</option>
-      <option value="level">Level</option>
-      <option value="mostcommon">Most common issues</option>
+      {#each Object.values(SortKey) as sortKey}
+        <option value={sortKey}>{sortKey}</option>
+      {/each}
     </select>
   </div>
 </div>

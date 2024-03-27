@@ -1,9 +1,10 @@
 import type { SuccessCriteria } from "../../types/wcag";
 
 export enum SortKey {
-  LEVEL = "level",
-  MOSTCOMMON = "mostcommon",
-  ID = "id",
+  ID = "Id",
+  LEVEL = "Level",
+  MOSTCOMMON = "Most common issues",
+  AUTOMATEDTESTS = "Has automated tests",
 }
 
 export function sortCritaria(items: Array<SuccessCriteria>, sortKey: SortKey) {
@@ -12,6 +13,9 @@ export function sortCritaria(items: Array<SuccessCriteria>, sortKey: SortKey) {
   }
   if (sortKey === SortKey.MOSTCOMMON) {
     return sortByMostCommon(items);
+  }
+  if (sortKey === SortKey.AUTOMATEDTESTS) {
+    return sortByAutomatedTests(items);
   }
   return sortByRefId(items);
 }
@@ -45,5 +49,11 @@ export function sortByMostCommon(items: Array<SuccessCriteria>) {
       return 0;
     }
     return b.percentageOfTotalIssues - a.percentageOfTotalIssues;
+  });
+}
+
+export function sortByAutomatedTests(items: Array<SuccessCriteria>) {
+  return [...items].sort((a, b) => {
+    return b.axeCoreRules?.length || 0 - a.axeCoreRules?.length || 0;
   });
 }

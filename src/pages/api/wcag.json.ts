@@ -1,6 +1,7 @@
 import wcag from "wcag-as-json/wcag.json";
 import auditResults from "../../data/auditResults.json";
 import type { Wcag, SuccessCriteria } from "../../../types/wcag";
+import axe from "axe-core";
 
 export async function GET({}) {
   if (!wcag) {
@@ -15,6 +16,9 @@ export async function GET({}) {
     successCriteria,
     auditResults.auditResultsDeque2021
   );
+
+  const rules = axe.getRules([]);
+  addAxeCoreData(successCriteriaWithAuditResults, rules);
 
   return new Response(JSON.stringify(successCriteriaWithAuditResults), {
     status: 200,
@@ -72,4 +76,16 @@ function addAuditResults(
     );
   });
   return successCriteria;
+}
+
+function addAxeCoreData(successCriteria: SuccessCriteria[], axeRules) {
+  successCriteria.forEach((item) => {
+    const matchingRules = axeRules.filter((rule) =>
+      rule.tags.includes(`wcag${item.ref_id.replace(/\./g, "")}`)
+    );
+    if (matchingRules.length) {
+      item.axeCoreRules = matchingRules;
+    }
+    return item;
+  });
 }

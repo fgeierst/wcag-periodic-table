@@ -29,6 +29,7 @@ export interface SuccessCriteria {
   automatedIssues?: number;
   manualIssues?: number;
   percentageOfTotalIssues?: number;
+  axeCoreRules?: any;
 }
 export interface SpecialCasesEntity {
   type: string;

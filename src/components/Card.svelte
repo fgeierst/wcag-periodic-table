@@ -2,6 +2,7 @@
   import type { SuccessCriteria } from "../../types/wcag";
   export let criterion: SuccessCriteria;
   export let backgroundColor: string = "#f0f0f0";
+  import RobotIcon from "./icons/robot.svelte";
 </script>
 
 <div class="card" style:background-color={backgroundColor}>
@@ -9,6 +10,11 @@
     <span class="ref-id">{criterion.ref_id}</span>
     {criterion.title}
   </a>
+  {#if criterion.axeCoreRules}
+    <div class="absolute right-1 bottom-1">
+      <RobotIcon alt="Has automated tests" />
+    </div>
+  {/if}
   {#if criterion.percentageOfTotalIssues ?? 0 > 0}
     <div>{criterion.percentageOfTotalIssues}%</div>
     <div
