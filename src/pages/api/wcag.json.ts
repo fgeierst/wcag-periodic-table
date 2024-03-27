@@ -78,9 +78,9 @@ function addAuditResults(
   return successCriteria;
 }
 
-function addAxeCoreData(successCriteria: SuccessCriteria[], axeRules) {
+function addAxeCoreData(successCriteria: SuccessCriteria[], axeRules: any) {
   successCriteria.forEach((item) => {
-    const matchingRules = axeRules.filter((rule) =>
+    const matchingRules = axeRules.filter((rule: any) =>
       rule.tags.includes(`wcag${item.ref_id.replace(/\./g, "")}`)
     );
     if (matchingRules.length) {
