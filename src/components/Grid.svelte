@@ -7,7 +7,7 @@
   let criteria: Array<SuccessCriteria> = [];
   let filteredCriteria: Array<SuccessCriteria> = [];
   let sortedCriteria: Array<SuccessCriteria> = [];
-  let level = "";
+  let selectedLevels: Array<string> = ["A", "AA", "AAA"];
   let sortKey: SortKey;
 
   onMount(async function () {
@@ -15,30 +15,38 @@
     criteria = await response.json();
   });
 
-  $: filteredCriteria = level
-    ? criteria.filter((criterion) => criterion.level === level)
+  $: filteredCriteria = selectedLevels
+    ? criteria.filter((criterion) => selectedLevels.includes(criterion.level))
     : criteria;
 
   $: sortedCriteria = sortCritaria(filteredCriteria, sortKey);
 </script>
 
-<h1 class="text-lg font-bold">Success Criteria ({filteredCriteria.length})</h1>
+<h1 class="text-lg font-bold">
+  WCAG 2.2 Success Criteria ({filteredCriteria.length})
+</h1>
 
-<div class="my-3">
-  <label for="level">Level </label>
-  <select id="level" bind:value={level} class="border">
-    <option value="" selected>All</option>
-    <option value="A">A</option>
-    <option value="AA">AA</option>
-    <option value="AAA">AAA</option>
-  </select>
+<div class="my-3 flex gap-x-5 gap-y-1 gap flex-row flex-wrap">
+  <div>
+    <span id="levelsLabel">Levels</span>
+    <span role="group" aria-labelledby="levelsLabel">
+      {#each ["A", "AA", "AAA"] as level}
+        <label>
+          <input type="checkbox" bind:group={selectedLevels} value={level} />
+          {level}
+        </label>
+      {/each}
+    </span>
+  </div>
 
-  <label for="sort">Sort by </label>
-  <select id="sort" bind:value={sortKey} class="border">
-    <option value="id" selected>Id</option>
-    <option value="level">Level</option>
-    <option value="mostcommon">Most common issues</option>
-  </select>
+  <div>
+    <label for="sort">Sort by</label>
+    <select id="sort" bind:value={sortKey} class="border">
+      <option value="id" selected>Id</option>
+      <option value="level">Level</option>
+      <option value="mostcommon">Most common issues</option>
+    </select>
+  </div>
 </div>
 
 <div class="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
