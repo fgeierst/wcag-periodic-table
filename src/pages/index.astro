@@ -7,6 +7,26 @@ import Grid from "../components/Grid.svelte";
   <main>
     <Grid client:load />
   </main>
-
-  <style></style>
+  <footer>
+    <details>
+      <summary>Sources</summary>
+      <ul class="list-disc space-y-1 pl-5 mt-1">
+        <li>
+          WCAG 2.2 success criteria from
+          <a class="underline" href="https://github.com/tenon-io/wcag-as-json"
+            >tenon-io/wcag-as-json</a
+          >
+        </li>
+        <li>
+          Most common issues data is from Deque's
+          <a
+            class="underline"
+            href="https://accessibility.deque.com/hubfs/Accessibility-Coverage-Report.pdf"
+          >
+            The Automated Accessibility Coverage Report (2021)
+          </a>
+        </li>
+      </ul>
+    </details>
+  </footer>
 </Layout>

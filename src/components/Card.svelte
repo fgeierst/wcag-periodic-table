@@ -5,7 +5,7 @@
 </script>
 
 <div class="card" style:background-color={backgroundColor}>
-  <a href={criterion.url} class="break-all" target="_blank">
+  <a href={criterion.url} target="_blank">
     <span class="ref-id">{criterion.ref_id}</span>
     {criterion.title}
   </a>
