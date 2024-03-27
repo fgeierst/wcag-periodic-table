@@ -41,7 +41,7 @@
   <label for="sort">Sort by </label>
   <select id="sort" bind:value={sort}>
     <option value="id" selected>Id</option>
-    <option value="percentage">Percentage of total issues</option>
+    <option value="percentage">Most common issues</option>
   </select>
 </div>
 

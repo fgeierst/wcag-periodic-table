@@ -5,23 +5,25 @@
 </script>
 
 <div class="card" style:background-color={backgroundColor}>
-  <div class="ref-id">{criterion.ref_id}</div>
-  <h3>
-    <a href={criterion.url} target="_blank">
-      {criterion.title}
-    </a>
-  </h3>
-  {#if criterion.percentageOfTotalIssues > 0}
+  <a href={criterion.url} class="break-all" target="_blank">
+    <span class="ref-id">{criterion.ref_id}</span>
+    {criterion.title}
+  </a>
+  {#if criterion.percentageOfTotalIssues ?? 0 > 0}
     <div>{criterion.percentageOfTotalIssues}%</div>
     <div
       class="percentage-bar"
       style:width={`${criterion.percentageOfTotalIssues}%`}
     ></div>
   {/if}
-  <!-- <div>{criterion.level}</div> -->
 </div>
 
 <style>
+  .break-all {
+    overflow-wrap: normal;
+    hyphens: auto;
+  }
+
   .card {
     padding: 0.5rem;
     display: flex;
@@ -31,12 +33,6 @@
     position: relative;
   }
 
-  h3 {
-    margin: 0;
-    font-weight: normal;
-    font-size: inherit;
-  }
-
   a {
     text-decoration: none;
     color: inherit;
@@ -44,11 +40,6 @@
     &:hover {
       text-decoration: underline;
     }
-  }
-
-  .ref-id {
-    font-size: 0.8rem;
-    margin-block-end: 0.3rem;
   }
 
   .percentage-bar {
