@@ -19,5 +19,8 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.3",
     "wcag-as-json": "github:tenon-io/wcag-as-json"
+  },
+  "devDependencies": {
+    "prettier": "3.2.5"
   }
 }

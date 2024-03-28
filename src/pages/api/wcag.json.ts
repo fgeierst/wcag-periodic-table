@@ -14,7 +14,7 @@ export async function GET({}) {
   const successCriteria = extractSuccessCriteria(wcag);
   const successCriteriaWithAuditResults = addAuditResults(
     successCriteria,
-    auditResults.auditResultsDeque2021
+    auditResults.auditResultsDeque2021,
   );
 
   const rules = axe.getRules([]);
@@ -55,15 +55,15 @@ type AuditResult = {
 };
 function addAuditResults(
   successCriteria: SuccessCriteria[],
-  auditResults: AuditResult[]
+  auditResults: AuditResult[],
 ) {
   const totalIssues = auditResults.reduce(
     (total, result) => total + result.AutomatedIssues + result.ManualIssues,
-    0
+    0,
   );
   successCriteria.forEach((item) => {
     const auditResult = auditResults.find(
-      (result) => result.ref_id === item.ref_id
+      (result) => result.ref_id === item.ref_id,
     );
 
     item.automatedIssues = auditResult?.AutomatedIssues || 0;
@@ -72,7 +72,7 @@ function addAuditResults(
       (((auditResult?.AutomatedIssues || 0) +
         (auditResult?.ManualIssues || 0)) /
         totalIssues) *
-        100
+        100,
     );
   });
   return successCriteria;
@@ -81,7 +81,7 @@ function addAuditResults(
 function addAxeCoreData(successCriteria: SuccessCriteria[], axeRules: any) {
   successCriteria.forEach((item) => {
     const matchingRules = axeRules.filter((rule: any) =>
-      rule.tags.includes(`wcag${item.ref_id.replace(/\./g, "")}`)
+      rule.tags.includes(`wcag${item.ref_id.replace(/\./g, "")}`),
     );
     if (matchingRules.length) {
       item.axeCoreRules = matchingRules;
