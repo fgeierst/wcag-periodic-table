@@ -5,8 +5,14 @@
   import RobotIcon from "./icons/Robot.svelte";
 </script>
 
-<div class="card relative" style:background-color={backgroundColor}>
-  <a href={criterion.url} class="absolute inset-0 after:content-['']">
+<div
+  class="card relative focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-black"
+  style:background-color={backgroundColor}
+>
+  <a
+    href={criterion.url}
+    class="after:absolute after:inset-0 after:content-[''] focus:outline-none"
+  >
     <span class="ref-id">{criterion.ref_id}</span>
     {criterion.title}
   </a>
@@ -31,7 +37,6 @@
     flex-direction: column;
     aspect-ratio: 1;
     overflow: hidden;
-    position: relative;
   }
 
   a {

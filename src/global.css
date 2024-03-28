@@ -1,3 +1,10 @@
 html {
   scrollbar-gutter: stable;
 }
+
+:focus-visible {
+  @apply outline;
+  @apply outline-2;
+  @apply outline-offset-2;
+  @apply outline-black;
+}
