@@ -3,7 +3,7 @@
   import { options } from "../stores.ts";
 </script>
 
-<div class="my-3 flex gap-x-5 gap-y-1 gap flex-row flex-wrap">
+<div class="gap my-3 flex flex-row flex-wrap gap-x-5 gap-y-1">
   <div>
     <span id="levelsLabel">Levels</span>
     <span role="group" aria-labelledby="levelsLabel">

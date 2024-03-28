@@ -5,13 +5,13 @@
   import RobotIcon from "./icons/Robot.svelte";
 </script>
 
-<div class="card" style:background-color={backgroundColor}>
-  <a href={criterion.url}>
+<div class="card relative" style:background-color={backgroundColor}>
+  <a href={criterion.url} class="absolute inset-0 after:content-['']">
     <span class="ref-id">{criterion.ref_id}</span>
     {criterion.title}
   </a>
   {#if criterion.axeCoreRules}
-    <div class="absolute right-1 bottom-1">
+    <div class="absolute bottom-1 right-1">
       <RobotIcon alt="Has automated tests" />
     </div>
   {/if}
