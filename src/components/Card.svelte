@@ -2,7 +2,7 @@
   import type { SuccessCriteria } from "../../types/wcag";
   export let criterion: SuccessCriteria;
   export let backgroundColor: string = "#f0f0f0";
-  import RobotIcon from "./icons/robot.svelte";
+  import RobotIcon from "./icons/Robot.svelte";
 </script>
 
 <div class="card" style:background-color={backgroundColor}>
