@@ -1,8 +1,8 @@
 <script lang="ts">
   import type { SuccessCriteria } from "../../types/wcag";
+  import Robot from "./icons/Robot.svelte";
   export let criterion: SuccessCriteria;
   export let backgroundColor: string = "#f0f0f0";
-  import RobotIcon from "./icons/Robot.svelte";
 </script>
 
 <div
@@ -18,7 +18,7 @@
   </a>
   {#if criterion.axeCoreRules}
     <div class="absolute bottom-1 right-1">
-      <RobotIcon alt="Has automated tests" />
+      <Robot alt="Has automated tests" />
     </div>
   {/if}
   {#if criterion.percentageOfTotalIssues ?? 0 > 0}
