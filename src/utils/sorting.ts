@@ -1,4 +1,4 @@
-import type { SuccessCriteria } from "../../types/wcag";
+import type { SuccessCriteria } from "../wcag";
 
 export enum SortKey {
   LEVEL = "Level",

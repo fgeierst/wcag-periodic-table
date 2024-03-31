@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SuccessCriteria } from "../../types/wcag";
+  import type { SuccessCriteria } from "../wcag";
   import Robot from "./icons/robot.svelte";
   export let criterion: SuccessCriteria;
   export let backgroundColor: string = "#f0f0f0";

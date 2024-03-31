@@ -1,6 +1,6 @@
 import wcag from "wcag-as-json/wcag.json";
 import auditResults from "../../data/auditResults.json";
-import type { Wcag, SuccessCriteria } from "../../../types/wcag";
+import type { Wcag, SuccessCriteria } from "../../wcag";
 import axe from "axe-core";
 
 export async function GET({}) {

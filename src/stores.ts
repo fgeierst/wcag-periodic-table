@@ -1,4 +1,4 @@
-import type { SuccessCriteria } from "../types/wcag";
+import type { SuccessCriteria } from "./wcag";
 import { writable, derived } from "svelte/store";
 import { sortCritaria, SortKey } from "./utils/sorting";
 
