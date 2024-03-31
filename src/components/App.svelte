@@ -3,7 +3,6 @@
   import Filter from "./Filter.svelte";
   import Card from "./Card.svelte";
   import { criteria, selectedCriteria } from "../stores.ts";
-  import { scale } from "svelte/transition";
   import { flip } from "svelte/animate";
   import { quadInOut } from "svelte/easing";
 
@@ -30,8 +29,6 @@
   <ul class="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
     {#each $selectedCriteria as criterion (criterion.ref_id)}
       <li
-        in:scale
-        out:scale
         animate:flip={{
           duration: reducedMotion ? 0 : 600,
           easing: quadInOut,
