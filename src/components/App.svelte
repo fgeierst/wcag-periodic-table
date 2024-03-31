@@ -17,30 +17,34 @@
   });
 </script>
 
-<h1 class="text-lg font-bold">
-  WCAG 2.2 Success Criteria ({$selectedCriteria.length})
-</h1>
+<header>
+  <h1 class="text-lg font-bold">
+    WCAG 2.2 Success Criteria ({$selectedCriteria.length})
+  </h1>
 
-<Filter />
+  <Filter />
+</header>
 
-<div class="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
-  {#each $selectedCriteria as criterion (criterion.ref_id)}
-    <div
-      animate:flip={{
-        duration: reducedMotion ? 0 : 600,
-        easing: quadInOut,
-      }}
-    >
-      <Card
-        {criterion}
-        backgroundColor={criterion.level === "A"
-          ? "lightgreen"
-          : criterion.level === "AA"
-            ? "yellow"
-            : criterion.level === "AAA"
-              ? "pink"
-              : ""}
-      />
-    </div>
-  {/each}
-</div>
+<main>
+  <ul class="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
+    {#each $selectedCriteria as criterion (criterion.ref_id)}
+      <li
+        animate:flip={{
+          duration: reducedMotion ? 0 : 600,
+          easing: quadInOut,
+        }}
+      >
+        <Card
+          {criterion}
+          backgroundColor={criterion.level === "A"
+            ? "lightgreen"
+            : criterion.level === "AA"
+              ? "yellow"
+              : criterion.level === "AAA"
+                ? "pink"
+                : ""}
+        />
+      </li>
+    {/each}
+  </ul>
+</main>

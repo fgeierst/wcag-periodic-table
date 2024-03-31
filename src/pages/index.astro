@@ -1,12 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Grid from "../components/App.svelte";
+import App from "../components/App.svelte";
 ---
 
 <Layout title="WCAG periodic table">
-  <main>
-    <Grid client:load />
-  </main>
+  <App client:load />
   <footer>
     <details>
       <summary>Sources</summary>

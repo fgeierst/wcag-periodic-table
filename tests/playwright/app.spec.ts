@@ -1,6 +1,17 @@
 import { test, expect } from "@playwright/test";
+import { SortKey } from "../../src/utils/sorting";
 
-test("has title", async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto("/");
-  await expect(page).toHaveTitle(/WCAG periodic table/);
+});
+
+test("displays all A and AA criteria", async ({ page }) => {
+  const items = page.getByRole("main").getByRole("listitem");
+  await expect(items).toHaveCount(56);
+});
+
+test("select only A levels", async ({ page }) => {
+  page.getByLabel("AA", { exact: true }).uncheck();
+  const items = page.getByRole("main").getByRole("listitem");
+  await expect(items).toHaveCount(32);
 });
