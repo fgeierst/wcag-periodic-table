@@ -68,12 +68,14 @@ function addAuditResults(
 
     item.automatedIssues = auditResult?.AutomatedIssues || 0;
     item.manualIssues = auditResult?.ManualIssues || 0;
-    item.percentageOfTotalIssues = Math.round(
-      (((auditResult?.AutomatedIssues || 0) +
-        (auditResult?.ManualIssues || 0)) /
-        totalIssues) *
-        100,
-    );
+    item.percentageOfTotalIssues =
+      Math.round(
+        (((auditResult?.AutomatedIssues || 0) +
+          (auditResult?.ManualIssues || 0)) /
+          totalIssues) *
+          100 *
+          100,
+      ) / 100;
   });
   return successCriteria;
 }
