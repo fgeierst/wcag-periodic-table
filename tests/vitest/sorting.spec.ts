@@ -4,8 +4,8 @@ import {
   sortByLevel,
   sortByMostCommon,
   sortByRefId,
-} from "./sorting";
-import type { SuccessCriteria } from "../wcag";
+} from "../../src/utils/sorting";
+import type { SuccessCriteria } from "../../src/wcag";
 
 const testCriteria: Array<SuccessCriteria> = [
   {
