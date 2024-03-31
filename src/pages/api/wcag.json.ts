@@ -3,7 +3,7 @@ import auditResults from "../../data/auditResults.json";
 import type { Wcag, SuccessCriteria } from "../../wcag";
 import axe from "axe-core";
 
-export async function GET({}) {
+export async function GET() {
   if (!wcag) {
     return new Response(null, {
       status: 404,
@@ -80,8 +80,10 @@ function addAuditResults(
   return successCriteria;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function addAxeCoreData(successCriteria: SuccessCriteria[], axeRules: any) {
   successCriteria.forEach((item) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const matchingRules = axeRules.filter((rule: any) =>
       rule.tags.includes(`wcag${item.ref_id.replace(/\./g, "")}`),
     );

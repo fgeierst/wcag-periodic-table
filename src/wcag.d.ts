@@ -29,6 +29,7 @@ export interface SuccessCriteria {
   automatedIssues?: number;
   manualIssues?: number;
   percentageOfTotalIssues?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   axeCoreRules?: any;
 }
 export interface SpecialCasesEntity {

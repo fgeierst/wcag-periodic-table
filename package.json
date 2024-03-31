@@ -12,7 +12,8 @@
     "astro": "astro",
     "test:vitest": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:playwright": "playwright test"
+    "test:playwright": "playwright test",
+    "lint": "eslint . --ext \"src/**/*.{js,ts,svelte}\" --fix"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
@@ -28,7 +29,10 @@
   "devDependencies": {
     "@playwright/test": "^1.42.1",
     "@types/node": "^20.12.2",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
     "@vitest/coverage-v8": "^1.4.0",
+    "eslint": "^8.57.0",
     "prettier": "3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-svelte": "^3.2.2",
