@@ -37,11 +37,11 @@
         <Card
           {criterion}
           backgroundColor={criterion.level === "A"
-            ? "lightgreen"
+            ? "#E9ECE9"
             : criterion.level === "AA"
-              ? "yellow"
+              ? "#DBDBE6"
               : criterion.level === "AAA"
-                ? "pink"
+                ? "#BACFDE"
                 : ""}
         />
       </li>
