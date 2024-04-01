@@ -41,7 +41,7 @@
             : criterion.level === "AA"
               ? "#DBDBE6"
               : criterion.level === "AAA"
-                ? "#BACFDE"
+                ? "#C8D9E4"
                 : ""}
         />
       </li>
