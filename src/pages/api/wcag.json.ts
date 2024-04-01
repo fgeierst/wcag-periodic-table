@@ -40,6 +40,8 @@ function extractSuccessCriteria(wcagData: Wcag[]) {
           description: criteria.description,
           url: criteria.url,
           level: criteria.level,
+          special_cases: criteria.special_cases,
+          references: criteria.references,
         });
       });
     });
