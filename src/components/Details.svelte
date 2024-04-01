@@ -19,7 +19,7 @@
   </Dialog.Trigger>
   <Dialog.Content class="gap-0">
     <Dialog.Header class="pr-6">
-      <Dialog.Title class="flex items-center gap-2 px-6 py-4">
+      <Dialog.Title class="flex items-center gap-2 px-6 py-4 text-left ">
         <span>
           {criterion.ref_id}
           <a href={criterion.url} class="underline">{criterion.title}</a>
