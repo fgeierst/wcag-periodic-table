@@ -36,7 +36,7 @@
       >
         <Card
           {criterion}
-          backgroundColor={criterion.level === "A"
+          --background-color={criterion.level === "A"
             ? "#E9ECE9"
             : criterion.level === "AA"
               ? "#DBDBE6"
