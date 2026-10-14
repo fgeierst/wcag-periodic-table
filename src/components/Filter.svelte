@@ -6,9 +6,9 @@
 <div class="gap my-3 flex flex-row flex-wrap gap-x-5 gap-y-1">
   <div>
     <span id="levelsLabel">Levels</span>
-    <span role="group" aria-labelledby="levelsLabel">
+    <span role="group" aria-labelledby="levelsLabel" class="inline-flex items-center gap-1">
       {#each ["A", "AA", "AAA"] as level}
-        <label>
+        <label class="inline-flex items-center gap-1">
           <input
             type="checkbox"
             bind:group={$options.selectedLevels}

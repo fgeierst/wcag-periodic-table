@@ -6,16 +6,15 @@
   type $$Props = DialogPrimitive.OverlayProps;
 
   let className: $$Props["class"] = undefined;
-  export let transition: $$Props["transition"] = fade;
-  export let transitionConfig: $$Props["transitionConfig"] = {
-    duration: 25,
-  };
   export { className as class };
 </script>
 
-<DialogPrimitive.Overlay
-  {transition}
-  {transitionConfig}
-  class={cn("backdrop-blur-xs fixed inset-0 z-50 bg-background/80", className)}
-  {...$$restProps}
-/>
+<DialogPrimitive.Overlay {...$$restProps}>
+  {#snippet child({ props, open })}
+    <div
+      {...props}
+      class={cn("backdrop-blur-xs fixed inset-0 z-50 bg-background/80", className)}
+      transition:fade={{ duration: open ? 120 : 80 }}
+    />
+  {/snippet}
+</DialogPrimitive.Overlay>
