@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const webmcpOriginTrialToken = import.meta.env.PUBLIC_WEBMCP_ORIGIN_TRIAL_TOKEN;
 ---
 
 <!doctype html>
@@ -17,6 +18,9 @@ const { title } = Astro.props;
       content="WCAG sucess criteria displayed as a periodic table"
     />
     <meta name="viewport" content="width=device-width" />
+    {webmcpOriginTrialToken && (
+      <meta http-equiv="origin-trial" content={webmcpOriginTrialToken} />
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>

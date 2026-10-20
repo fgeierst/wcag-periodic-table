@@ -2,27 +2,33 @@
   import { onMount } from "svelte";
   import Filter from "./Filter.svelte";
   import Card from "./Card.svelte";
-  import { criteria, selectedCriteria } from "../stores.ts";
+  import Status from "./Status.svelte";
+  import { criteria, selectedCriteria, criteriaLoadState } from "../stores.ts";
   import { flip } from "svelte/animate";
   import { quadInOut } from "svelte/easing";
 
   let reducedMotion = false;
 
   onMount(async function () {
-    const response = await fetch("/api/wcag.json");
-    $criteria = await response.json();
     reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    try {
+      const response = await fetch("/api/wcag.json");
+      if (!response.ok) throw new Error("Unable to load criteria");
+      $criteria = await response.json();
+      $criteriaLoadState = "ready";
+    } catch {
+      $criteriaLoadState = "error";
+    }
   });
 </script>
 
 <header>
-  <h1 class="text-lg font-bold">
-    WCAG 2.2 Success Criteria ({$selectedCriteria.length})
-  </h1>
+  <h1 class="text-lg font-bold">WCAG 2.2 Success Criteria</h1>
 
   <Filter />
+  <Status />
 </header>
 
 <main>
