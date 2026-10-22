@@ -2,6 +2,11 @@
 
 Displays the WCAG 2.2 success criteria as sortable sticky notes.
 
+Select a criterion to open its full detail page, including its description,
+exceptions, related axe-core rules, and reference links. Each criterion has a
+shareable URL such as `/criteria/1.1.1/` that works on direct visits and reloads,
+even without JavaScript. Use **Back to criteria** to return to the table.
+
 ## Search criteria
 
 Use the search beside the filters to find criterion IDs, titles, descriptions,

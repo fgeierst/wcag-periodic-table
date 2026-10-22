@@ -1,16 +1,17 @@
 <script lang="ts">
   import Badges from "./Badges.svelte";
-  import Details from "./Details.svelte";
   import type { SuccessCriteria } from "../wcag";
   export let criterion: SuccessCriteria;
 </script>
 
-<div
-  class="card relative flex aspect-square flex-col justify-between overflow-hidden rounded p-1"
+<a
+  href={`/criteria/${criterion.ref_id}/`}
+  aria-label={`${criterion.ref_id} ${criterion.title}`}
+  class="card relative flex aspect-square flex-col justify-between overflow-hidden rounded p-1 text-left hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
 >
-  <Details {criterion}></Details>
+  <div class="line-clamp-3">{criterion.ref_id} {criterion.title}</div>
   <Badges {criterion} small></Badges>
-</div>
+</a>
 
 <style>
   .card {
