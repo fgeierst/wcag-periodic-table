@@ -31,7 +31,8 @@ test("card links support visible keyboard focus and Enter", async ({
   await expect(link).toBeFocused();
   expect(
     await link.evaluate((element) => {
-      const style = getComputedStyle(element);
+      const tile = element.closest(".card")!;
+      const style = getComputedStyle(tile);
       return (
         style.outlineStyle !== "none" && parseFloat(style.outlineWidth) > 0
       );
@@ -39,6 +40,47 @@ test("card links support visible keyboard focus and Enter", async ({
   ).toBe(true);
   await link.press("Enter");
   await expect(page).toHaveURL("/criteria/keyboard/");
+});
+
+test("only the criterion title is link text while the whole tile remains clickable", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const link = page.getByRole("link", {
+    name: "1.1.1 Non-text Content",
+    exact: true,
+  });
+  await expect(link).toHaveText("1.1.1 Non-text Content");
+  const tile = page
+    .getByRole("main")
+    .getByRole("listitem")
+    .filter({ has: link });
+  const badge = tile.getByText("axe", { exact: true });
+  expect(await badge.evaluate((element) => element.closest("a") === null)).toBe(
+    true,
+  );
+  await tile.hover();
+  expect(
+    await link.evaluate(
+      (element) => getComputedStyle(element).textDecorationLine,
+    ),
+  ).toContain("underline");
+  expect(
+    await badge.evaluate(
+      (element) => getComputedStyle(element).textDecorationLine,
+    ),
+  ).not.toContain("underline");
+  const box = await tile.boundingBox();
+  await page.mouse.click(box!.x + 2, box!.y + box!.height / 2);
+  await expect(page).toHaveURL("/criteria/non-text-content/");
+  await page.goBack();
+  await expect(link).toBeVisible();
+  const badgeBox = await badge.boundingBox();
+  await page.mouse.click(
+    badgeBox!.x + badgeBox!.width / 2,
+    badgeBox!.y + badgeBox!.height / 2,
+  );
+  await expect(page).toHaveURL("/criteria/non-text-content/");
 });
 
 test("detail pages can be opened directly and reloaded without JavaScript", async ({
