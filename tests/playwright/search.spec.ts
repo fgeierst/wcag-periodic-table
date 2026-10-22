@@ -119,7 +119,7 @@ test("submits keyword searches with button and Enter, not draft typing", async (
   await expect(cards).toHaveCount(1);
   await expect(
     cards.getByRole("link", { name: "2.1.1 Keyboard", exact: true }),
-  ).toHaveAttribute("href", "/criteria/2.1.1/");
+  ).toHaveAttribute("href", "/criteria/keyboard/");
   await expect(
     page.getByRole("button", { name: "Clear", exact: true }),
   ).toHaveCount(0);

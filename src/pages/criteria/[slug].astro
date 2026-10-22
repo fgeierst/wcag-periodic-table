@@ -2,12 +2,13 @@
 import type { GetStaticPaths } from "astro";
 import type { SuccessCriteria } from "../../wcag";
 import { getCriteria } from "../../data/criteria";
+import { criterionPath } from "../../utils/criterion-url";
 import Details from "../../components/Details.svelte";
 import Layout from "../../layouts/Layout.astro";
 
 export const getStaticPaths = (() =>
   getCriteria().map((criterion) => ({
-    params: { id: criterion.ref_id },
+    params: { slug: criterionPath(criterion.title).split("/")[2] },
     props: { criterion },
   }))) satisfies GetStaticPaths;
 
@@ -18,18 +19,8 @@ interface Props {
 const { criterion } = Astro.props;
 ---
 
-<Layout title={`${criterion.ref_id} ${criterion.title} | WCAG periodic table`}>
-  <div class="mx-auto max-w-3xl space-y-6">
-    <nav aria-label="Criteria navigation">
-      <a
-        href="/"
-        class="inline-block py-2 underline focus-visible:outline-2 focus-visible:outline-offset-2"
-      >
-        Back to criteria
-      </a>
-    </nav>
-    <main>
-      <Details {criterion} />
-    </main>
-  </div>
+<Layout title={`WCAG 2.2 / ${criterion.ref_id} ${criterion.title}`}>
+  <main class="max-w-[80ch]">
+    <Details {criterion} />
+  </main>
 </Layout>

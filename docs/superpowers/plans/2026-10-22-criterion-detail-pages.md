@@ -65,3 +65,14 @@
 - Verification: 26 Vitest tests, 22 Playwright tests against both dev and production preview, lint, Astro check (zero diagnostics), formatting, and build (88 pages) passed. Generated JSON is identical to the saved baseline; all 87 detail files exist. Desktop and 320px screenshots inspected.
 - Independent review found a table-context regression on returning from detail pages. Added two RED→GREEN round-trip tests and restored submitted query, selected levels, and sorting via validated tab-scoped session storage in `src/components/App.svelte`; synchronized `src/components/Search.svelte` with the restored query. The suite now has 24 Playwright tests. Storage failure falls back to ordinary non-persistent browsing.
 - Existing omissions of criterion notes, sorting comparator defects, and JavaScript-dependent table loading remain unchanged and outside issue #6.
+
+## Follow-up: index-style layout and name-based URLs
+
+The user's revised requirements supersede the initial layout and numeric routes:
+
+- Left-align detail pages at the same body inset as the index; limit text width to `80ch`.
+- Use the index h1 size (`text-lg font-bold`). The heading and document title read `WCAG 2.2 / {ref_id} {title}`; the heading's `WCAG 2.2` links to `/`.
+- Remove the separate back navigation and horizontal separators, including section borders.
+- Use lowercase, hyphenated criterion names in `/criteria/{slug}/`, preserving parenthetical distinctions (for example, `keyboard-no-exception`).
+- Share name-based link generation in `src/utils/criterion-url.ts` and generate all 87 pages in `src/pages/criteria/[slug].astro`.
+- Updated routing/content/round-trip tests and added literal URL examples, uniqueness, alignment, typography, 80ch, and separator regressions. Verified new behavior RED→GREEN.

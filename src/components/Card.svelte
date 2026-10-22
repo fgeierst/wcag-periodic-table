@@ -1,11 +1,12 @@
 <script lang="ts">
   import Badges from "./Badges.svelte";
   import type { SuccessCriteria } from "../wcag";
+  import { criterionPath } from "../utils/criterion-url";
   export let criterion: SuccessCriteria;
 </script>
 
 <a
-  href={`/criteria/${criterion.ref_id}/`}
+  href={criterionPath(criterion.title)}
   aria-label={`${criterion.ref_id} ${criterion.title}`}
   class="card relative flex aspect-square flex-col justify-between overflow-hidden rounded p-1 text-left hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
 >

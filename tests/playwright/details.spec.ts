@@ -9,17 +9,15 @@ test("criterion cards navigate to full pages instead of dialogs", async ({
   const link = page
     .getByRole("main")
     .getByRole("link", { name: "1.1.1 Non-text Content", exact: true });
-  await expect(link).toHaveAttribute("href", "/criteria/1.1.1/");
+  await expect(link).toHaveAttribute("href", "/criteria/non-text-content/");
   await link.click();
-  await expect(page).toHaveURL("/criteria/1.1.1/");
+  await expect(page).toHaveURL("/criteria/non-text-content/");
   await expect(
     page.getByRole("main").getByRole("heading", { level: 1 }),
-  ).toHaveText("1.1.1 Non-text Content");
+  ).toHaveText("WCAG 2.2 / 1.1.1 Non-text Content");
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(page).toHaveTitle(
-    "1.1.1 Non-text Content | WCAG periodic table",
-  );
-  await page.getByRole("link", { name: "Back to criteria" }).click();
+  await expect(page).toHaveTitle("WCAG 2.2 / 1.1.1 Non-text Content");
+  await page.getByRole("link", { name: "WCAG 2.2", exact: true }).click();
   await expect(page).toHaveURL("/");
   await expect(page.getByRole("main").getByRole("listitem")).toHaveCount(56);
 });
@@ -40,7 +38,7 @@ test("card links support visible keyboard focus and Enter", async ({
     }),
   ).toBe(true);
   await link.press("Enter");
-  await expect(page).toHaveURL("/criteria/2.1.1/");
+  await expect(page).toHaveURL("/criteria/keyboard/");
 });
 
 test("detail pages can be opened directly and reloaded without JavaScript", async ({
@@ -49,9 +47,9 @@ test("detail pages can be opened directly and reloaded without JavaScript", asyn
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
   try {
-    await page.goto("/criteria/2.1.3/");
+    await page.goto("/criteria/keyboard-no-exception/");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      "2.1.3 Keyboard (No Exception)",
+      "WCAG 2.2 / 2.1.3 Keyboard (No Exception)",
     );
     await expect(page.getByRole("main")).toContainText(
       "without requiring specific timings",
@@ -60,7 +58,7 @@ test("detail pages can be opened directly and reloaded without JavaScript", asyn
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
     await expect(page.getByRole("main")).toContainText("AAA");
     await expect(
-      page.getByRole("link", { name: "Back to criteria" }),
+      page.getByRole("link", { name: "WCAG 2.2", exact: true }),
     ).toHaveAttribute("href", "/");
   } finally {
     await context.close();
@@ -70,7 +68,7 @@ test("detail pages can be opened directly and reloaded without JavaScript", asyn
 test("detail pages preserve exceptions, statistics, rules, and references", async ({
   page,
 }) => {
-  await page.goto("/criteria/1.4.3/");
+  await page.goto("/criteria/contrast-minimum/");
   const main = page.getByRole("main");
   await expect(main).toContainText("contrast ratio of at least 4.5:1");
   await expect(main).toContainText("29%");
@@ -106,12 +104,12 @@ test("detail pages preserve exceptions, statistics, rules, and references", asyn
 test("criteria without rules or exceptions omit empty sections", async ({
   page,
 }) => {
-  await page.goto("/criteria/3.3.9/");
+  await page.goto("/criteria/accessible-authentication-enhanced/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "3.3.9 Accessible Authentication (Enhanced)",
+    "WCAG 2.2 / 3.3.9 Accessible Authentication (Enhanced)",
   );
   await expect(page.getByRole("heading", { name: /axe-core/ })).toHaveCount(0);
-  await page.goto("/criteria/2.1.3/");
+  await page.goto("/criteria/keyboard-no-exception/");
   await expect(page.getByRole("main").getByRole("listitem")).toHaveCount(1);
 });
 
@@ -128,14 +126,18 @@ test("all criterion links including AAA resolve to the corresponding static page
   const links = page.getByRole("main").getByRole("link");
   await expect(links).toHaveCount(87);
   for (const criterion of criteria) {
-    const href = `/criteria/${criterion.ref_id}/`;
+    const slug = criterion.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    const href = `/criteria/${slug}/`;
     await expect(
       links.filter({ hasText: `${criterion.ref_id} ${criterion.title}` }),
     ).toHaveAttribute("href", href);
     const response = await request.get(href);
     expect(response.status(), href).toBe(200);
     expect(await response.text(), href).toContain(
-      `<title>${criterion.ref_id} ${criterion.title} | WCAG periodic table</title>`,
+      `<title>WCAG 2.2 / ${criterion.ref_id} ${criterion.title}</title>`,
     );
   }
 });
@@ -144,7 +146,7 @@ test("long details use document scrolling and fit narrow screens", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 320, height: 568 });
-  await page.goto("/criteria/1.1.1/");
+  await page.goto("/criteria/non-text-content/");
   const main = page.getByRole("main");
   await expect(main).toContainText("Decoration, Formatting, Invisible");
   await expect(
@@ -160,7 +162,7 @@ test("long details use document scrolling and fit narrow screens", async ({
     ),
   }));
   expect(layout).toEqual({ fits: true, scrolls: true, nestedScroll: false });
-  await page.goto("/criteria/3.3.9/");
+  await page.goto("/criteria/accessible-authentication-enhanced/");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -171,9 +173,9 @@ test("long details use document scrolling and fit narrow screens", async ({
 test("detail pages have no detectable WCAG A/AA accessibility violations", async ({
   page,
 }) => {
-  await page.goto("/criteria/1.1.1/");
+  await page.goto("/criteria/non-text-content/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "1.1.1 Non-text Content",
+    "WCAG 2.2 / 1.1.1 Non-text Content",
   );
   await page.addScriptTag({ content: axe.source });
   const violations = await page.evaluate(
@@ -215,9 +217,9 @@ for (const returnMethod of ["back link", "browser Back"] as const) {
     await page
       .getByRole("link", { name: "2.1.3 Keyboard (No Exception)", exact: true })
       .click();
-    await expect(page).toHaveURL("/criteria/2.1.3/");
+    await expect(page).toHaveURL("/criteria/keyboard-no-exception/");
     if (returnMethod === "back link") {
-      await page.getByRole("link", { name: "Back to criteria" }).click();
+      await page.getByRole("link", { name: "WCAG 2.2", exact: true }).click();
     } else {
       await page.goBack();
     }
@@ -231,3 +233,52 @@ for (const returnMethod of ["back link", "browser Back"] as const) {
     expect(await items.allTextContents()).toEqual(before);
   });
 }
+
+test("details match the index alignment and heading size with an 80ch text limit and no separators", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  const indexHeading = await page
+    .getByRole("heading", { level: 1 })
+    .evaluate((element) => ({
+      x: element.getBoundingClientRect().x,
+      y: element.getBoundingClientRect().y,
+      size: getComputedStyle(element).fontSize,
+    }));
+  await page.goto("/criteria/non-text-content/");
+  const heading = page.getByRole("heading", { level: 1 });
+  await expect(heading).toHaveText("WCAG 2.2 / 1.1.1 Non-text Content");
+  await expect(
+    heading.getByRole("link", { name: "WCAG 2.2", exact: true }),
+  ).toHaveAttribute("href", "/");
+  const details = await heading.evaluate((element) => ({
+    x: element.getBoundingClientRect().x,
+    y: element.getBoundingClientRect().y,
+    size: getComputedStyle(element).fontSize,
+  }));
+  expect(details).toEqual(indexHeading);
+  await expect(page.getByRole("separator")).toHaveCount(0);
+  const widthAndBorders = await page.getByRole("main").evaluate((main) => {
+    const measure = document.createElement("div");
+    measure.style.width = "80ch";
+    main.appendChild(measure);
+    const maxWidth = measure.getBoundingClientRect().width;
+    measure.remove();
+    return {
+      width: main.getBoundingClientRect().width,
+      maxWidth,
+      borders: [main, ...main.querySelectorAll("header, section")].some(
+        (element) => {
+          const style = getComputedStyle(element);
+          return (
+            parseFloat(style.borderTopWidth) > 0 ||
+            parseFloat(style.borderBottomWidth) > 0
+          );
+        },
+      ),
+    };
+  });
+  expect(widthAndBorders.width).toBeLessThanOrEqual(widthAndBorders.maxWidth);
+  expect(widthAndBorders.borders).toBe(false);
+});

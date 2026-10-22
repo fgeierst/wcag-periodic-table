@@ -9,8 +9,14 @@
 </script>
 
 <article class="space-y-6 [overflow-wrap:anywhere]">
-  <header class="space-y-3 border-b pb-4">
-    <h1 class="text-2xl font-bold">
+  <header class="space-y-3">
+    <h1 class="text-lg font-bold">
+      <a
+        href="/"
+        class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
+        >WCAG 2.2</a
+      >
+      /
       {criterion.ref_id}
       {criterion.title}
     </h1>
@@ -65,7 +71,7 @@
     </section>
   {/if}
 
-  <section aria-labelledby="references-heading" class="space-y-3 border-t pt-4">
+  <section aria-labelledby="references-heading" class="space-y-3">
     <h2 id="references-heading" class="font-bold">References</h2>
     <a
       href={criterion.url}
