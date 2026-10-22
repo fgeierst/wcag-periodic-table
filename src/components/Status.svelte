@@ -8,8 +8,8 @@
   {:else if $criteriaLoadState === "error"}
     WCAG criteria could not be loaded.
   {:else}
-    {$searchResult.visibleCount} criteria {#if $searchResult.query}
-      matching "{$searchResult.query}"{/if}.
+    {$searchResult.visibleCount} criteria{#if $searchResult.query}
+      &nbsp;matching "{$searchResult.query}"{/if}.
     {#if $searchResult.excludedByLevelCount}
       {$searchResult.excludedByLevelCount} more hidden by level filters.
     {/if}

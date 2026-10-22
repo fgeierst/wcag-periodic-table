@@ -20,6 +20,7 @@
 </script>
 
 <form
+  aria-labelledby="criteria-search"
   class="flex max-w-full min-w-0 items-center gap-2"
   toolname={$criteriaLoadState === "ready" ? "search_wcag_criteria" : undefined}
   tooldescription={$criteriaLoadState === "ready"

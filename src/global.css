@@ -69,7 +69,7 @@
 
 @layer base {
   html {
-    scrollbar-gutter: auto;
+    scrollbar-gutter: stable;
   }
   * {
     @apply border-border;

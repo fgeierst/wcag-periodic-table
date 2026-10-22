@@ -11,7 +11,9 @@
 </script>
 
 <Dialog.Root>
-  <Dialog.Trigger class="text-left">
+  <Dialog.Trigger
+    class="text-left before:absolute before:inset-0 before:z-10 before:rounded before:content-[''] focus-visible:outline-none"
+  >
     <div class="line-clamp-3">
       {criterion.ref_id}
       {criterion.title}

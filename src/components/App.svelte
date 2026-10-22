@@ -4,15 +4,8 @@
   import Card from "./Card.svelte";
   import Status from "./Status.svelte";
   import { criteria, selectedCriteria, criteriaLoadState } from "../stores.ts";
-  import { flip } from "svelte/animate";
-  import { quadInOut } from "svelte/easing";
-
-  let reducedMotion = false;
 
   onMount(async function () {
-    reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     try {
       const response = await fetch("/api/wcag.json");
       if (!response.ok) throw new Error("Unable to load criteria");
@@ -34,12 +27,7 @@
 <main>
   <ul class="grid grid-cols-[repeat(auto-fill,minmax(7rem,1fr))] gap-3">
     {#each $selectedCriteria as criterion (criterion.ref_id)}
-      <li
-        animate:flip={{
-          duration: reducedMotion ? 0 : 600,
-          easing: quadInOut,
-        }}
-      >
+      <li class="rounded focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-current focus-within:outline-solid">
         <Card
           {criterion}
           --background-color={criterion.level === "A"

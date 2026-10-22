@@ -1,36 +1,10 @@
 ---
 import App from "../components/App.svelte";
+import Footer from "../components/Footer.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="WCAG periodic table">
+<Layout title="WCAG Explorer">
   <App client:load />
-  <footer class="mt-8">
-    <details>
-      <summary>Sources</summary>
-      <ul class="mt-1 list-disc space-y-1 pl-5">
-        <li>
-          WCAG 2.2 success criteria from&nbsp;
-          <a class="underline" href="https://github.com/tenon-io/wcag-as-json">
-            tenon-io/wcag-as-json
-          </a>
-        </li>
-        <li>
-          Most common issues data is from Deque's&nbsp;
-          <a
-            class="underline"
-            href="https://accessibility.deque.com/hubfs/Accessibility-Coverage-Report.pdf"
-          >
-            The Automated Accessibility Coverage Report (2021)
-          </a>
-        </li>
-        <li>
-          Automated test rules from&nbsp;
-          <a class="underline" href="https://github.com/dequelabs/axe-core">
-            axe-core
-          </a>
-        </li>
-      </ul>
-    </details>
-  </footer>
+  <Footer />
 </Layout>

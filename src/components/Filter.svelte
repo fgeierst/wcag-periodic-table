@@ -6,13 +6,9 @@
 
 <div class="my-3 flex flex-row flex-wrap items-center gap-x-5 gap-y-3">
   <Search />
-  <div>
-    <span id="levelsLabel">Levels</span>
-    <span
-      role="group"
-      aria-labelledby="levelsLabel"
-      class="inline-flex items-center gap-1"
-    >
+  <fieldset class="inline-block border-0 p-0 align-middle">
+    <legend class="float-left mr-2">Levels</legend>
+    <div class="inline-flex items-center gap-1">
       {#each ["A", "AA", "AAA"] as level}
         <label class="inline-flex items-center gap-1">
           <input
@@ -23,8 +19,8 @@
           {level}
         </label>
       {/each}
-    </span>
-  </div>
+    </div>
+  </fieldset>
 
   <div>
     <label for="sort">Sort by</label>
