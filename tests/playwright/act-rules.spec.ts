@@ -15,18 +15,26 @@ test("ACT section lists unique rules and summaries, not testcases", async ({
     "This rule checks that the highest possible contrast",
   );
   await expect(
-    section.getByRole("link", { name: "09o5cg", exact: true }),
+    section.getByRole("link", {
+      name: "Text has enhanced contrast",
+      exact: true,
+    }),
   ).toHaveAttribute(
     "href",
     "https://www.w3.org/WAI/standards-guidelines/act/rules/09o5cg/",
   );
   await expect(
-    section.getByRole("link", { name: "afw4f7", exact: true }),
+    section.getByRole("link", {
+      name: "Text has minimum contrast",
+      exact: true,
+    }),
   ).toHaveAttribute(
     "href",
     "https://www.w3.org/WAI/standards-guidelines/act/rules/afw4f7/",
   );
   await expect(section.locator('a[href*="testcases"]')).toHaveCount(0);
+  await expect(section).not.toContainText("09o5cg");
+  await expect(section).not.toContainText("afw4f7");
   await expect(
     page.getByRole("heading", { name: "axe-core Rule", exact: true }),
   ).toBeVisible();
@@ -41,7 +49,10 @@ test("one ACT rule uses a singular heading and its approved link", async ({
   await expect(section).toContainText("Autocomplete attribute has valid value");
   await expect(section).not.toContainText("Proposed");
   await expect(
-    section.getByRole("link", { name: "73f2c2", exact: true }),
+    section.getByRole("link", {
+      name: "Autocomplete attribute has valid value",
+      exact: true,
+    }),
   ).toHaveAttribute(
     "href",
     "https://www.w3.org/WAI/standards-guidelines/act/rules/73f2c2/",
@@ -53,7 +64,10 @@ test("proposed ACT rules are explicitly labeled", async ({ page }) => {
   const section = page.getByRole("region", { name: "ACT Rule", exact: true });
   await expect(section).toContainText("Proposed");
   await expect(
-    section.getByRole("link", { name: "9bd38c", exact: true }),
+    section.getByRole("link", {
+      name: "Content has alternative for visual reference",
+      exact: true,
+    }),
   ).toHaveAttribute(
     "href",
     "https://www.w3.org/WAI/standards-guidelines/act/rules/9bd38c/proposed/",
@@ -69,9 +83,12 @@ test("criteria with no ACT rules omit the section", async ({ page }) => {
 test("deprecated ACT rules are explicitly labeled", async ({ page }) => {
   await page.goto("/criteria/non-text-content/");
   const section = page.getByRole("region", { name: /^ACT Rules/ });
-  const deprecatedRule = section
-    .getByRole("listitem")
-    .filter({ has: page.getByRole("link", { name: "9eb3f6", exact: true }) });
+  const deprecatedRule = section.getByRole("listitem").filter({
+    has: page.getByRole("link", {
+      name: "Image filename is accessible name for image",
+      exact: true,
+    }),
+  });
   await expect(deprecatedRule).toContainText(
     "Image filename is accessible name for image",
   );
@@ -84,7 +101,10 @@ test("ACT links are underlined, visibly focusable, and fit a narrow viewport", a
   await page.setViewportSize({ width: 320, height: 568 });
   await page.goto("/criteria/non-text-content/");
   const section = page.getByRole("region", { name: /^ACT Rules/ });
-  const link = section.getByRole("link", { name: "23a2a8", exact: true });
+  const link = section.getByRole("link", {
+    name: "Image has non-empty accessible name",
+    exact: true,
+  });
   await link.focus();
   await expect(link).toBeFocused();
   const style = await link.evaluate((element) => {

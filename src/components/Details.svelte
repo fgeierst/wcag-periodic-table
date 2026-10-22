@@ -117,9 +117,8 @@
             <a
               href={rule.rulePage}
               class="text-gray-600 underline focus-visible:outline-2 focus-visible:outline-offset-2"
-              >{rule.ruleId}</a
+              >{rule.ruleName}</a
             >
-            <span>{rule.ruleName}</span>
             {#if rule.status !== "approved"}
               <span class="text-gray-600">
                 ({rule.status === "proposed" ? "Proposed" : "Deprecated"})
