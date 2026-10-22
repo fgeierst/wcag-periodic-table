@@ -5,6 +5,7 @@
   export let criterion: SuccessCriteria;
 
   $: roundedPercentage = Math.floor(criterion.percentageOfTotalIssues ?? 0);
+  $: version = criterion.version ?? "2.2";
 </script>
 
 <article class="space-y-6 [overflow-wrap:anywhere]">
@@ -13,7 +14,7 @@
       <a
         href="/"
         class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
-        >WCAG 2.2</a
+        >WCAG {version}</a
       >
       /
       {criterion.ref_id}
@@ -32,19 +33,27 @@
     </div>
   </header>
 
-  <div class="space-y-3">
-    <p>{criterion.description}</p>
-    {#if criterion.special_cases?.length}
-      <ul class="list-outside list-disc space-y-2 pl-5">
-        {#each criterion.special_cases as specialCase}
-          <li>
-            <span class="font-semibold">{specialCase.title}</span
-            >{#if specialCase.description}: {specialCase.description}{/if}
-          </li>
-        {/each}
-      </ul>
-    {/if}
-  </div>
+  {#if criterion.content}
+    <div class="wcag-content space-y-3">
+      <!-- Trusted, repository-reviewed W3C snapshot HTML; never user-supplied content. -->
+      <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+      {@html criterion.content}
+    </div>
+  {:else}
+    <div class="space-y-3">
+      <p>{criterion.description}</p>
+      {#if criterion.special_cases?.length}
+        <ul class="list-outside list-disc space-y-2 pl-5">
+          {#each criterion.special_cases as specialCase}
+            <li>
+              <span class="font-semibold">{specialCase.title}</span
+              >{#if specialCase.description}: {specialCase.description}{/if}
+            </li>
+          {/each}
+        </ul>
+      {/if}
+    </div>
+  {/if}
 
   <section aria-labelledby="references-heading" class="space-y-3">
     <h2 id="references-heading" class="font-bold">References</h2>
@@ -53,7 +62,7 @@
         <a
           href={criterion.url}
           class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
-          >WCAG 2.2 specification</a
+          >WCAG {version} specification</a
         >
       </li>
       {#each criterion.references ?? [] as reference}
@@ -93,3 +102,29 @@
     </section>
   {/if}
 </article>
+
+<style>
+  .wcag-content :global(a) {
+    text-decoration: underline;
+  }
+  .wcag-content :global(a:focus-visible) {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+  .wcag-content :global(dt),
+  .wcag-content :global(.note-title) {
+    font-weight: 600;
+  }
+  .wcag-content :global(dd) {
+    margin-bottom: 0.75rem;
+  }
+  .wcag-content :global(ul) {
+    list-style: disc outside;
+    padding-left: 1.25rem;
+  }
+  .wcag-content :global(li + li),
+  .wcag-content :global(.note),
+  .wcag-content :global(p + p) {
+    margin-top: 0.75rem;
+  }
+</style>

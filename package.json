@@ -11,6 +11,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "update:criteria": "node scripts/update-criteria.mjs",
     "test:vitest": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:playwright": "playwright test",
@@ -27,8 +28,7 @@
     "svelte": "^5.57.2",
     "tailwind-merge": "^3.7.0",
     "tailwind-variants": "^3.3.1",
-    "tailwindcss": "^4.3.3",
-    "wcag-as-json": "github:tenon-io/wcag-as-json"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

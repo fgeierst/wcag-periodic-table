@@ -24,7 +24,7 @@
   class="flex max-w-full min-w-0 items-center gap-2"
   toolname={$criteriaLoadState === "ready" ? "search_wcag_criteria" : undefined}
   tooldescription={$criteriaLoadState === "ready"
-    ? "Search WCAG criterion references by literal keywords, title, or ID. Every word must match criterion text or related axe-core rule descriptions. Updates visible cards using current level filters and sort order; reports matches hidden by level filters. Returns references, not a diagnosis or conformance verdict. Submit an empty query to remove the search without resetting filters."
+    ? "Search WCAG criterion references by literal keywords, title, or ID. Every word must match criterion text or related axe-core rule descriptions. Updates visible cards using the current WCAG version, added-only and level filters, and sort order; reports matches hidden by level filters. Returns references, active filter settings and counts, not a diagnosis or conformance verdict. Submit an empty query to remove the search without resetting filters."
     : undefined}
   toolautosubmit={$criteriaLoadState === "ready" ? true : undefined}
   on:submit={submit}

@@ -1,38 +1,61 @@
-import wcag from "wcag-as-json/wcag.json";
+import wcag21 from "./wcag-2.1.json";
+import wcag22 from "./wcag-2.2.json";
 import auditResults from "./auditResults.json";
-import type { Wcag, SuccessCriteria } from "../wcag";
+import type { WcagVersion, SuccessCriteria } from "../wcag";
 import axe from "axe-core";
 
-export function getCriteria(): SuccessCriteria[] {
-  const successCriteria = extractSuccessCriteria(wcag);
+export function getCriteria(version: WcagVersion = "2.2"): SuccessCriteria[] {
+  const source = version === "2.2" ? wcag22 : wcag21;
+  const sourceVersion = version === "2.2" ? "22" : "21";
+  const successCriteria: SuccessCriteria[] = source.principles.flatMap(
+    (principle) =>
+      principle.guidelines.flatMap((guideline) =>
+        guideline.successcriteria
+          .filter((criterion) => criterion.versions.includes(version))
+          .map((criterion) => ({
+            ref_id: criterion.num,
+            title: criterion.handle,
+            description: criterion.title,
+            content: criterion.content,
+            version,
+            versions: [...criterion.versions] as WcagVersion[],
+            level: criterion.level,
+            url: `https://www.w3.org/TR/WCAG${sourceVersion}/#${criterion.id}`,
+            special_cases: criterion.details.flatMap((detail) =>
+              detail.type === "ulist" && "items" in detail && detail.items
+                ? detail.items.map((item) => ({
+                    type: "exception",
+                    title: "handle" in item ? item.handle : "",
+                    description: item.text,
+                  }))
+                : detail.type === "p" && "text" in detail && detail.text
+                  ? [{ type: "paragraph", title: "", description: detail.text }]
+                  : [],
+            ),
+            notes: criterion.details.flatMap((detail) =>
+              detail.type === "note" && "text" in detail && detail.text
+                ? [{ content: detail.text }]
+                : [],
+            ),
+            references: [
+              {
+                title: `How to Meet ${criterion.num}`,
+                url: `https://www.w3.org/WAI/WCAG${sourceVersion}/quickref/#${criterion.id}`,
+              },
+              {
+                title: `Understanding ${criterion.num}`,
+                url: `https://www.w3.org/WAI/WCAG${sourceVersion}/Understanding/${criterion.id}.html`,
+              },
+            ],
+          })),
+      ),
+  );
   const successCriteriaWithAuditResults = addAuditResults(
     successCriteria,
     auditResults.auditResultsDeque2021,
   );
   addAxeCoreData(successCriteriaWithAuditResults, axe.getRules([]));
   return successCriteriaWithAuditResults;
-}
-
-function extractSuccessCriteria(wcagData: Wcag[]) {
-  const successCriteria: SuccessCriteria[] = [];
-
-  wcagData.forEach((item) => {
-    item.guidelines?.forEach((guideline) => {
-      guideline.success_criteria?.forEach((criteria) => {
-        successCriteria.push({
-          ref_id: criteria.ref_id,
-          title: criteria.title,
-          description: criteria.description,
-          url: criteria.url,
-          level: criteria.level,
-          special_cases: criteria.special_cases,
-          references: criteria.references,
-        });
-      });
-    });
-  });
-
-  return successCriteria;
 }
 
 type AuditResult = {

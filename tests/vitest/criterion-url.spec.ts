@@ -15,7 +15,7 @@ it("gives every criterion a unique name-based URL", () => {
   const paths = getCriteria().map((criterion) =>
     criterionPath(criterion.title),
   );
-  expect(new Set(paths).size).toBe(87);
+  expect(new Set(paths).size).toBe(86);
   expect(
     paths.every((path) => /^\/criteria\/[a-z]+(?:-[a-z]+)*\/$/.test(path)),
   ).toBe(true);

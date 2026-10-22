@@ -1,10 +1,12 @@
-import type { SuccessCriteria } from "../wcag";
+import type { SuccessCriteria, WcagVersion } from "../wcag";
 import { sortCritaria, SortKey } from "./sorting";
 
 export interface CriterionSearchResult {
   query: string;
   selectedLevels: string[];
   sortKey: SortKey;
+  selectedVersion: WcagVersion;
+  onlyAdded: boolean;
   visibleCount: number;
   excludedByLevelCount: number;
   criteria: SuccessCriteria[];
@@ -41,10 +43,16 @@ export function searchCriteria(
   query: string,
   levels: string[],
   sortKey: SortKey,
+  selectedVersion: WcagVersion = "2.2",
+  onlyAdded = false,
 ): CriterionSearchResult {
+  const addedOnly = onlyAdded && selectedVersion !== "2.0";
   const normalizedQuery = query.trim().replace(/\s+/g, " ");
-  const matches = items.filter((criterion) =>
-    matchesCriterion(criterion, normalizedQuery),
+  const matches = items.filter(
+    (criterion) =>
+      (!criterion.versions || criterion.versions.includes(selectedVersion)) &&
+      (!addedOnly || criterion.versions?.[0] === selectedVersion) &&
+      matchesCriterion(criterion, normalizedQuery),
   );
   const visible = matches.filter((criterion) =>
     levels.includes(criterion.level),
@@ -53,6 +61,8 @@ export function searchCriteria(
     query: normalizedQuery,
     selectedLevels: [...levels],
     sortKey,
+    selectedVersion,
+    onlyAdded: addedOnly,
     visibleCount: visible.length,
     excludedByLevelCount: matches.length - visible.length,
     criteria: sortCritaria(visible, sortKey),

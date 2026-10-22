@@ -5,9 +5,9 @@ import { GET } from "../../src/pages/api/wcag.json";
 describe("shared criterion data", () => {
   it("includes every criterion once with its detail content", () => {
     const criteria = getCriteria();
-    expect(criteria).toHaveLength(87);
+    expect(criteria).toHaveLength(86);
     expect(new Set(criteria.map((criterion) => criterion.ref_id)).size).toBe(
-      87,
+      86,
     );
     expect(
       criteria.find((criterion) => criterion.ref_id === "1.1.1"),
@@ -19,10 +19,10 @@ describe("shared criterion data", () => {
         expect.objectContaining({ title: "Controls, Input" }),
       ]),
       references: expect.arrayContaining([
-        {
+        expect.objectContaining({
           title: "Understanding 1.1.1",
           url: "https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html",
-        },
+        }),
       ]),
     });
     expect(
@@ -31,6 +31,59 @@ describe("shared criterion data", () => {
       title: "Accessible Authentication (Enhanced)",
       level: "AAA",
     });
+  });
+
+  it.each([
+    ["2.0", 61],
+    ["2.1", 78],
+    ["2.2", 86],
+  ] as const)("returns the criteria included in WCAG %s", (version, count) => {
+    const criteria = getCriteria(version);
+    expect(criteria).toHaveLength(count);
+    expect(
+      criteria.every((criterion) => criterion.versions?.includes(version)),
+    ).toBe(true);
+    expect(criteria.every((criterion) => criterion.version === version)).toBe(
+      true,
+    );
+  });
+
+  it("preserves Parsing and historical names only in the appropriate versions", () => {
+    expect(
+      getCriteria("2.0").find((criterion) => criterion.ref_id === "4.1.1"),
+    ).toMatchObject({
+      title: "Parsing",
+      level: "A",
+      description: expect.stringContaining("complete start and end tags"),
+    });
+    expect(
+      getCriteria("2.1").find((criterion) => criterion.ref_id === "2.5.5"),
+    ).toMatchObject({
+      title: "Target Size",
+      url: "https://www.w3.org/TR/WCAG21/#target-size",
+    });
+    expect(
+      getCriteria().find((criterion) => criterion.ref_id === "4.1.1"),
+    ).toBeUndefined();
+    expect(
+      getCriteria().find((criterion) => criterion.ref_id === "2.5.5"),
+    ).toMatchObject({ title: "Target Size (Enhanced)" });
+  });
+
+  it("retains full official content, including linked definitions and notes", () => {
+    const criterion = getCriteria().find(
+      (criterion) => criterion.ref_id === "1.1.1",
+    )!;
+    expect(criterion.content).toContain(
+      'href="https://www.w3.org/TR/WCAG22/#dfn-non-text-content"',
+    );
+    expect(criterion.content).toContain("<dt>Controls, Input</dt>");
+    expect(
+      getCriteria("2.1").find((criterion) => criterion.ref_id === "4.1.1")!
+        .content,
+    ).toContain(
+      "This success criterion should be considered as always satisfied",
+    );
   });
 
   it("preserves audit results and matching axe rules", () => {

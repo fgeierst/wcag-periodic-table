@@ -19,7 +19,7 @@ test("criterion cards navigate to full pages instead of dialogs", async ({
   await expect(page).toHaveTitle("WCAG 2.2 / 1.1.1 Non-text Content");
   await page.getByRole("link", { name: "WCAG 2.2", exact: true }).click();
   await expect(page).toHaveURL("/");
-  await expect(page.getByRole("main").getByRole("listitem")).toHaveCount(56);
+  await expect(page.getByRole("main").getByRole("listitem")).toHaveCount(55);
 });
 
 test("card links support visible keyboard focus and Enter", async ({
@@ -187,7 +187,7 @@ test("all criterion links including AAA resolve to the corresponding static page
   await page.goto("/");
   await page.getByLabel("AAA", { exact: true }).check();
   const links = page.getByRole("main").getByRole("link");
-  await expect(links).toHaveCount(87);
+  await expect(links).toHaveCount(86);
   for (const criterion of criteria) {
     const slug = criterion.title
       .toLowerCase()
@@ -267,7 +267,9 @@ for (const path of ["/", "/criteria/non-text-content/"]) {
     const footer = page.getByRole("contentinfo");
     await expect(footer).toHaveCount(1);
     await expect(footer.locator('a[href="/"]')).toHaveCount(0);
-    const attribution = footer.locator("p");
+    const attribution = footer
+      .getByRole("listitem", { includeHidden: true })
+      .filter({ hasText: "Made with" });
     await expect(attribution).toContainText("Made with");
     await expect(attribution).not.toBeVisible();
     await footer.getByText("Sources", { exact: true }).click();
@@ -282,7 +284,7 @@ for (const path of ["/", "/criteria/non-text-content/"]) {
     await expect(
       footer.getByRole("link", { name: "Contact", exact: true }),
     ).toHaveAttribute("href", "https://florian.geierstanger.org/kontakt/");
-    await expect(footer.getByRole("listitem")).toHaveCount(3);
+    await expect(footer.getByRole("listitem")).toHaveCount(4);
     await footer.getByText("Sources", { exact: true }).click();
     await expect(attribution).not.toBeVisible();
   });

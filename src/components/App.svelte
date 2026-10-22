@@ -12,6 +12,7 @@
     searchQuery,
   } from "../stores.ts";
   import { SortKey } from "../utils/sorting.ts";
+  import type { WcagVersion } from "../wcag";
 
   onMount(function () {
     const storageKey = "wcag-table-state";
@@ -27,8 +28,14 @@
         Object.values(SortKey).includes(saved.sortKey)
       ) {
         $options = {
+          ...$options,
           selectedLevels: saved.selectedLevels,
           sortKey: saved.sortKey,
+          selectedVersion: ["2.0", "2.1", "2.2"].includes(saved.selectedVersion)
+            ? saved.selectedVersion
+            : "2.2",
+          onlyAdded:
+            saved.onlyAdded === true && saved.selectedVersion !== "2.0",
         };
         $searchQuery = saved.query;
       }
@@ -48,24 +55,45 @@
         // Browsing and search still work when storage is unavailable.
       }
     });
-    void loadCriteria();
-    return unsubscribe;
+    let loadedVersion: WcagVersion | undefined;
+    const unsubscribeVersion = options.subscribe(({ selectedVersion }) => {
+      if (selectedVersion !== loadedVersion) {
+        loadedVersion = selectedVersion;
+        void loadCriteria(selectedVersion);
+      }
+    });
+    return () => {
+      unsubscribe();
+      unsubscribeVersion();
+      requestId++;
+    };
   });
 
-  async function loadCriteria() {
+  let requestId = 0;
+  async function loadCriteria(version: WcagVersion) {
+    const currentRequest = ++requestId;
+    $criteria = [];
+    $criteriaLoadState = "loading";
     try {
-      const response = await fetch("/api/wcag.json");
+      const response = await fetch(
+        version === "2.2" ? "/api/wcag.json" : `/api/wcag/${version}.json`,
+      );
       if (!response.ok) throw new Error("Unable to load criteria");
-      $criteria = await response.json();
+      const data = await response.json();
+      if (currentRequest !== requestId) return;
+      $criteria = data;
       $criteriaLoadState = "ready";
     } catch {
+      if (currentRequest !== requestId) return;
       $criteriaLoadState = "error";
     }
   }
 </script>
 
 <header>
-  <h1 class="text-lg font-bold">WCAG 2.2 Success Criteria</h1>
+  <h1 class="text-lg font-bold">
+    WCAG {$options.selectedVersion} Success Criteria
+  </h1>
 
   <Filter />
   <Status />

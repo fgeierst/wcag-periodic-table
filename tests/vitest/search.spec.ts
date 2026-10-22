@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { matchesCriterion, searchCriteria } from "../../src/utils/search";
 import { SortKey } from "../../src/utils/sorting";
 import type { SuccessCriteria } from "../../src/wcag";
+import { getCriteria } from "../../src/data/criteria";
 
 const keyboard: SuccessCriteria = {
   ref_id: "2.1.1",
@@ -70,6 +71,13 @@ describe("criterion text matching", () => {
   it("handles absent optional fields", () => {
     expect(matchesCriterion(focus, "drawing")).toBe(false);
   });
+  it.each([
+    ["1.4.12", "scripts"],
+    ["1.4.10", "two-dimensional layout"],
+  ])("finds %s by its exception paragraph", (refId, query) => {
+    const criterion = getCriteria().find((item) => item.ref_id === refId)!;
+    expect(matchesCriterion(criterion, query)).toBe(true);
+  });
 });
 
 describe("shared search results", () => {
@@ -85,11 +93,71 @@ describe("shared search results", () => {
       query: "KEYBOARD",
       selectedLevels: ["A", "AA"],
       sortKey: SortKey.LEVEL,
+      selectedVersion: "2.2",
+      onlyAdded: false,
       visibleCount: 2,
       excludedByLevelCount: 1,
       criteria: [keyboard, focus],
     });
     expect(fixtures).toEqual(original);
+  });
+
+  it.each([
+    ["2.1", 17, 12, 5],
+    ["2.2", 9, 6, 3],
+  ] as const)(
+    "shows only criteria added in %s with accurate level exclusions",
+    (version, all, visible, hidden) => {
+      const items = getCriteria(version);
+      expect(
+        searchCriteria(
+          items,
+          "",
+          ["A", "AA", "AAA"],
+          SortKey.LEVEL,
+          version,
+          true,
+        ).visibleCount,
+      ).toBe(all);
+      expect(
+        searchCriteria(items, "", ["A", "AA"], SortKey.LEVEL, version, true),
+      ).toMatchObject({
+        visibleCount: visible,
+        excludedByLevelCount: hidden,
+        selectedVersion: version,
+        onlyAdded: true,
+      });
+    },
+  );
+
+  it("ignores added-only for the 2.0 baseline and filters later-version records", () => {
+    expect(
+      searchCriteria(
+        getCriteria("2.1"),
+        "",
+        ["A", "AA", "AAA"],
+        SortKey.LEVEL,
+        "2.0",
+        true,
+      ),
+    ).toMatchObject({ visibleCount: 61, onlyAdded: false });
+  });
+
+  it("combines added-only with keyword matching and sort order", () => {
+    const result = searchCriteria(
+      getCriteria(),
+      "focus",
+      ["AA", "AAA"],
+      SortKey.LEVEL,
+      "2.2",
+      true,
+    );
+    expect(result.criteria.map((criterion) => criterion.ref_id)).toEqual([
+      "2.4.11",
+      "2.4.12",
+      "2.4.13",
+    ]);
+    expect(result.excludedByLevelCount).toBe(0);
   });
   it("counts all text matches as excluded when no levels are selected", () => {
     expect(

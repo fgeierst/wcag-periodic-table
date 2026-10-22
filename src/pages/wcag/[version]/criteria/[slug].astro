@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from "astro";
+import type { SuccessCriteria } from "../../../../wcag";
+import { getCriteria } from "../../../../data/criteria";
+import { criterionPath } from "../../../../utils/criterion-url";
+import Details from "../../../../components/Details.svelte";
+import Footer from "../../../../components/Footer.astro";
+import Layout from "../../../../layouts/Layout.astro";
+
+export const getStaticPaths = (() =>
+  (["2.0", "2.1"] as const).flatMap((version) =>
+    getCriteria(version).map((criterion) => ({
+      params: { version, slug: criterionPath(criterion.title).split("/")[2] },
+      props: { criterion },
+    })),
+  )) satisfies GetStaticPaths;
+
+interface Props {
+  criterion: SuccessCriteria;
+}
+const { criterion } = Astro.props;
+---
+
+<Layout
+  title={`WCAG ${criterion.version} / ${criterion.ref_id} ${criterion.title}`}
+>
+  <main class="max-w-[80ch]">
+    <Details {criterion} />
+  </main>
+  <Footer />
+</Layout>

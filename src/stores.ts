@@ -1,4 +1,4 @@
-import type { SuccessCriteria } from "./wcag";
+import type { SuccessCriteria, WcagVersion } from "./wcag";
 import { writable, derived } from "svelte/store";
 import { SortKey } from "./utils/sorting";
 import { searchCriteria } from "./utils/search";
@@ -6,11 +6,15 @@ import { searchCriteria } from "./utils/search";
 interface Options {
   sortKey: SortKey;
   selectedLevels: string[];
+  selectedVersion: WcagVersion;
+  onlyAdded: boolean;
 }
 
 export const options = writable({
   sortKey: SortKey.LEVEL,
   selectedLevels: ["A", "AA"],
+  selectedVersion: "2.2",
+  onlyAdded: false,
 } as Options);
 
 export const criteria = writable([] as SuccessCriteria[]);
@@ -27,6 +31,8 @@ export const searchResult = derived(
       $searchQuery,
       $options.selectedLevels,
       $options.sortKey,
+      $options.selectedVersion,
+      $options.onlyAdded,
     ),
 );
 

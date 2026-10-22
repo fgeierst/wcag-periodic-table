@@ -8,7 +8,7 @@
 <div
   class="card relative flex aspect-square flex-col justify-between overflow-hidden rounded p-1 text-left"
 >
-  <a href={criterionPath(criterion.title)} class="title">
+  <a href={criterionPath(criterion.title, criterion.version)} class="title">
     <span class="line-clamp-3">{criterion.ref_id} {criterion.title}</span>
   </a>
   <Badges {criterion} small></Badges>

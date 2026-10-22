@@ -14,7 +14,7 @@
       {$searchResult.excludedByLevelCount} more hidden by level filters.
     {/if}
     {#if !$searchResult.visibleCount}
-      Try another keyword or change the level filters.
+      Try another keyword or change the filters.
     {/if}
   {/if}
 </p>

@@ -1,23 +1,12 @@
-﻿export interface Wcag {
-  ref_id: string;
-  title: string;
-  description: string;
-  url: string;
-  guidelines?: GuidelinesEntity[] | null;
-}
-export interface GuidelinesEntity {
-  ref_id: string;
-  title: string;
-  description: string;
-  url: string;
-  references?: ReferencesEntity[] | null;
-  success_criteria?: SuccessCriteria[] | null;
-}
+﻿export type WcagVersion = "2.0" | "2.1" | "2.2";
 export interface ReferencesEntity {
   title: string;
   url: string;
 }
 export interface SuccessCriteria {
+  version?: WcagVersion;
+  versions?: WcagVersion[];
+  content?: string;
   ref_id: string;
   title: string;
   description: string;

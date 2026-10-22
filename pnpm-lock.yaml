@@ -199,9 +199,6 @@ importers:
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
-      wcag-as-json:
-        specifier: github:tenon-io/wcag-as-json
-        version: https://codeload.github.com/tenon-io/wcag-as-json/tar.gz/954f6b5a7950fff2643007539ec720f4f8889ac3
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -2834,11 +2831,6 @@ packages:
   vscode-uri@3.2.0:
     resolution: {integrity: sha512-m2gXo3bn0G1kT9InzMf07fTbqMbGtyckj3bH5ktLO+1Ssv+yiATZ4dhwaQv9UZWxJh6E9IFGnQyjgWVDWVBDrg==}
 
-  wcag-as-json@https://codeload.github.com/tenon-io/wcag-as-json/tar.gz/954f6b5a7950fff2643007539ec720f4f8889ac3:
-    resolution: {gitHosted: true, integrity: sha512-I31CpquFz3nLMCQRNnSoZcnKDOQnVO6dRR0orxCZxCQwJoVQPNPnK5TxO7llNMfYoVob6A1mVpB+SFqLbVFwtA==, tarball: https://codeload.github.com/tenon-io/wcag-as-json/tar.gz/954f6b5a7950fff2643007539ec720f4f8889ac3}
-    version: 0.0.0
-    engines: {node: '>= 4.2.0'}
-
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
@@ -5299,8 +5291,6 @@ snapshots:
   vscode-nls@5.2.0: {}
 
   vscode-uri@3.2.0: {}
-
-  wcag-as-json@https://codeload.github.com/tenon-io/wcag-as-json/tar.gz/954f6b5a7950fff2643007539ec720f4f8889ac3: {}
 
   which@2.0.2:
     dependencies:
