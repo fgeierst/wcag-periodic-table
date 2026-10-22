@@ -20,6 +20,15 @@ export interface SuccessCriteria {
   percentageOfTotalIssues?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   axeCoreRules?: any;
+  actRules?: ActRule[];
+}
+export interface ActRule {
+  ruleId: string;
+  ruleName: string;
+  description: string;
+  rulePage: string;
+  successCriteria: string[];
+  status: "approved" | "proposed" | "deprecated";
 }
 export interface SpecialCasesEntity {
   type: string;

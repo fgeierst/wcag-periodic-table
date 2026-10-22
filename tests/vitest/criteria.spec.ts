@@ -114,6 +114,59 @@ describe("shared criterion data", () => {
     expect(await response.json()).toEqual(getCriteria());
   });
 
+  it("associates unique ACT rules with each matching criterion, not testcases", () => {
+    const criteria = getCriteria();
+    const contrast = criteria.find((criterion) => criterion.ref_id === "1.4.3");
+    expect(contrast?.actRules).toEqual([
+      expect.objectContaining({
+        ruleId: "09o5cg",
+        ruleName: "Text has enhanced contrast",
+        status: "approved",
+      }),
+      expect.objectContaining({
+        ruleId: "afw4f7",
+        ruleName: "Text has minimum contrast",
+        rulePage:
+          "https://www.w3.org/WAI/standards-guidelines/act/rules/afw4f7/",
+      }),
+    ]);
+    expect(
+      criteria.find((criterion) => criterion.ref_id === "1.3.5")?.actRules,
+    ).toEqual([expect.objectContaining({ ruleId: "73f2c2" })]);
+    expect(
+      criteria.find((criterion) => criterion.ref_id === "3.3.9")?.actRules,
+    ).toBeUndefined();
+    expect(
+      criteria.find((criterion) => criterion.ref_id === "1.3.1")?.actRules,
+    ).toEqual(
+      expect.arrayContaining([expect.objectContaining({ ruleId: "674b10" })]),
+    );
+    for (const criterion of criteria) {
+      const rules = criterion.actRules ?? [];
+      expect(new Set(rules.map((rule) => rule.ruleId)).size).toBe(rules.length);
+      for (const rule of rules) {
+        expect(rule.rulePage).not.toContain("testcases");
+        expect(rule).not.toHaveProperty("testcaseId");
+        expect(rule).not.toHaveProperty("expected");
+        expect(rule.successCriteria).not.toEqual([]);
+      }
+    }
+  });
+
+  it("returns fresh ACT rule metadata on repeated calls", () => {
+    const first = getCriteria().find(
+      (criterion) => criterion.ref_id === "1.4.3",
+    )!;
+    expect(first.actRules).toBeDefined();
+    first.actRules![0].ruleName = "Changed";
+    first.actRules![0].successCriteria.push("changed");
+    const next = getCriteria().find(
+      (criterion) => criterion.ref_id === "1.4.3",
+    )!;
+    expect(next.actRules![0].ruleName).toBe("Text has enhanced contrast");
+    expect(next.actRules![0].successCriteria).not.toContain("changed");
+  });
+
   it("returns fresh criterion records on repeated calls", () => {
     const first = getCriteria();
     first[0].title = "Changed";

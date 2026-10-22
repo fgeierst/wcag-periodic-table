@@ -1,8 +1,12 @@
 import wcag21 from "./wcag-2.1.json";
 import wcag22 from "./wcag-2.2.json";
 import auditResults from "./auditResults.json";
-import type { WcagVersion, SuccessCriteria } from "../wcag";
+import actRules from "./actRules.json";
+import type { WcagVersion, SuccessCriteria, ActRule } from "../wcag";
 import axe from "axe-core";
+import { criterionPath } from "../utils/criterion-url";
+
+const actRuleCatalogue = actRules as ActRule[];
 
 export function getCriteria(version: WcagVersion = "2.2"): SuccessCriteria[] {
   const source = version === "2.2" ? wcag22 : wcag21;
@@ -55,6 +59,7 @@ export function getCriteria(version: WcagVersion = "2.2"): SuccessCriteria[] {
     auditResults.auditResultsDeque2021,
   );
   addAxeCoreData(successCriteriaWithAuditResults, axe.getRules([]));
+  addActRuleData(successCriteriaWithAuditResults);
   return successCriteriaWithAuditResults;
 }
 
@@ -100,6 +105,21 @@ function addAxeCoreData(
     );
     if (matchingRules.length) {
       item.axeCoreRules = matchingRules;
+    }
+  });
+}
+
+function addActRuleData(successCriteria: SuccessCriteria[]) {
+  successCriteria.forEach((item) => {
+    const slug = criterionPath(item.title).split("/")[2];
+    const matchingRules = actRuleCatalogue.filter((rule) =>
+      rule.successCriteria.includes(slug),
+    );
+    if (matchingRules.length) {
+      item.actRules = matchingRules.map((rule) => ({
+        ...rule,
+        successCriteria: [...rule.successCriteria],
+      }));
     }
   });
 }

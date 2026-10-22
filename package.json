@@ -12,6 +12,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "update:criteria": "node scripts/update-criteria.mjs",
+    "update:act-rules": "node scripts/update-act-rules.mjs",
     "test:vitest": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:playwright": "playwright test",

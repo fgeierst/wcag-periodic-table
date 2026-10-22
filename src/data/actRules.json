@@ -1,0 +1,782 @@
+[
+  {
+    "ruleId": "5f99a7",
+    "ruleName": "ARIA attribute is defined in WAI-ARIA",
+    "description": "This rule checks that each `aria-` attribute specified is defined in ARIA 1.2.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/5f99a7/",
+    "successCriteria": ["info-and-relationships", "name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "kb1m8s",
+    "ruleName": "ARIA global properties not used where prohibited",
+    "description": "This rule checks that global WAI-ARIA properties are not on elements whose role prohibits them.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/kb1m8s/proposed/",
+    "successCriteria": ["info-and-relationships"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "ff89c9",
+    "ruleName": "ARIA required context role",
+    "description": "This rule checks that an element with an explicit semantic role exists inside its required context.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ff89c9/proposed/",
+    "successCriteria": ["info-and-relationships"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "in6db8",
+    "ruleName": "ARIA required ID references exist",
+    "description": "This rule checks that every ID reference required by WAI-ARIA exists",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/in6db8/proposed/",
+    "successCriteria": ["info-and-relationships", "name-role-value"],
+    "status": "deprecated"
+  },
+  {
+    "ruleId": "bc4a75",
+    "ruleName": "ARIA required owned elements",
+    "description": "This rule checks that an element with a semantic role that restricts which elements it can own only owns such elements.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/bc4a75/proposed/",
+    "successCriteria": ["info-and-relationships"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "6a7281",
+    "ruleName": "ARIA state or property has valid value",
+    "description": "This rule checks that each ARIA state or property has a valid value type.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/6a7281/",
+    "successCriteria": ["info-and-relationships", "name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "5c01ea",
+    "ruleName": "ARIA state or property is permitted",
+    "description": "This rule checks that WAI-ARIA states or properties are allowed for the element they are specified on.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/5c01ea/proposed/",
+    "successCriteria": ["info-and-relationships", "name-role-value"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "e6952f",
+    "ruleName": "Attribute is not duplicated",
+    "description": "This rule checks that HTML and SVG starting tags do not contain duplicated attributes.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/e6952f/proposed/",
+    "successCriteria": ["parsing"],
+    "status": "deprecated"
+  },
+  {
+    "ruleId": "1a02b0",
+    "ruleName": "Audio and visuals of video element have transcript",
+    "description": "This rule checks that non-streaming `video` elements have all audio and visual information available in a transcript.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/1a02b0/proposed/",
+    "successCriteria": [
+      "audio-only-and-video-only-prerecorded",
+      "info-and-relationships",
+      "media-alternative-prerecorded"
+    ],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "e7aa44",
+    "ruleName": "Audio element content has text alternative",
+    "description": "This rule checks that `audio` elements have a text alternative available.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/e7aa44/proposed/",
+    "successCriteria": ["audio-only-and-video-only-prerecorded"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "2eb176",
+    "ruleName": "Audio element content has transcript",
+    "description": "This rule checks that `audio` elements have a transcript that includes all auditory information.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/2eb176/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "afb423",
+    "ruleName": "Audio element content is media alternative for text",
+    "description": "This rule checks that the `audio` element is a media alternative for text on the page.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/afb423/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "80f0bf",
+    "ruleName": "Audio or video element avoids automatically playing audio",
+    "description": "This rule checks that audio or video that plays automatically does not have audio that lasts for more than 3 seconds or has an audio control mechanism to stop or mute it.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/80f0bf/proposed/",
+    "successCriteria": ["audio-control"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "4c31df",
+    "ruleName": "Audio or video element that plays automatically has a control mechanism",
+    "description": "audio or video that plays automatically must have a control mechanism.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/4c31df/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "aaa1bf",
+    "ruleName": "Audio or video element that plays automatically has no audio that lasts more than 3 seconds",
+    "description": "`audio` or `video` that plays automatically does not output audio for more than 3 seconds.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/aaa1bf/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "73f2c2",
+    "ruleName": "Autocomplete attribute has valid value",
+    "description": "This rule checks that the HTML `autocomplete` attribute has a correct value.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/73f2c2/",
+    "successCriteria": ["identify-input-purpose"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "3e12e1",
+    "ruleName": "Block of repeated content is collapsible",
+    "description": "This rule checks that repeated blocks of content are collapsible",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/3e12e1/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "97a4e1",
+    "ruleName": "Button has non-empty accessible name",
+    "description": "This rule checks that each `button` element has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/97a4e1/",
+    "successCriteria": ["name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "cf77f2",
+    "ruleName": "Bypass Blocks of Repeated Content",
+    "description": "This rule checks that each page has a mechanism to bypass repeated blocks of content.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/cf77f2/proposed/",
+    "successCriteria": ["bypass-blocks"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "9bd38c",
+    "ruleName": "Content has alternative for visual reference",
+    "description": "This rule checks that when content is identified through a visual reference, there are also non-visual references identifying the same content.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/9bd38c/proposed/",
+    "successCriteria": ["sensory-characteristics"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "7677a9",
+    "ruleName": "Device motion based changes to the content can also be created from the user interface",
+    "description": "This rule checks that changes to the content of a web page that result from device motion events can also be caused by user interface components.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/7677a9/proposed/",
+    "successCriteria": ["motion-actuation"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "c249d5",
+    "ruleName": "Device motion based changes to the content can be disabled",
+    "description": "This rule checks that it is possible to disable any changes to the content of the web page resulting from device motion based events.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/c249d5/proposed/",
+    "successCriteria": ["motion-actuation"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "b40fd1",
+    "ruleName": "Document has a landmark with non-repeated content",
+    "description": "This rule checks that each page has an element with a landmark semantic role starting with non-repeated content",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/b40fd1/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "ye5d6e",
+    "ruleName": "Document has an instrument to move focus to non-repeated content",
+    "description": "This rule checks that there is an instrument to move focus to non-repeated content in the page",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ye5d6e/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "047fe0",
+    "ruleName": "Document has heading for non-repeated content",
+    "description": "This rule checks that the non-repeated content contains a heading",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/047fe0/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "oj04fd",
+    "ruleName": "Element in sequential focus order has visible focus",
+    "description": "This rule checks that each element in sequential focus order has some visible focus indication.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/oj04fd/",
+    "successCriteria": ["focus-visible"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "46ca7f",
+    "ruleName": "Element marked as decorative is not exposed",
+    "description": "This rule checks that elements marked as decorative either are not included in the accessibility tree, or have a presentational role.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/46ca7f/",
+    "successCriteria": ["non-text-content"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "6cfa84",
+    "ruleName": "Element with aria-hidden has no content in sequential focus navigation",
+    "description": "This rule checks that elements with an `aria-hidden` attribute do not contain elements that are part of the sequential focus navigation and focusable.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/6cfa84/",
+    "successCriteria": ["name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "de46e4",
+    "ruleName": "Element with lang attribute has valid language tag",
+    "description": "This rule checks that a non-empty `lang` attribute of an element in the page has a language tag with a known primary language subtag.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/de46e4/",
+    "successCriteria": ["language-of-parts"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "307n5z",
+    "ruleName": "Element with presentational children has no focusable content",
+    "description": "This rule checks that elements with a role that makes its children presentational do not contain focusable elements.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/307n5z/",
+    "successCriteria": ["name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "4e8ab6",
+    "ruleName": "Element with role attribute has required states and properties",
+    "description": "This rule checks that elements that have an explicit role also specify all required states and properties.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/4e8ab6/",
+    "successCriteria": ["info-and-relationships", "name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "36b590",
+    "ruleName": "Error message describes invalid form field value",
+    "description": "This rule checks that text error messages provided when the user completes a form field with invalid values or using an invalid format, identify the cause of the error or how to fix the error.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/36b590/proposed/",
+    "successCriteria": ["error-identification"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "80af7b",
+    "ruleName": "Focusable element has no keyboard trap",
+    "description": "This rule checks for keyboard traps. This includes use of both standard and non-standard keyboard navigation to navigate through all content without becoming trapped.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/80af7b/proposed/",
+    "successCriteria": ["no-keyboard-trap"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "ebe86a",
+    "ruleName": "Focusable element has no keyboard trap via non-standard navigation",
+    "description": "This rule checks if it is possible to use non-standard keyboard navigation to navigate through content where focus is trapped when using standard ways of keyboard navigation.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ebe86a/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "a1b64e",
+    "ruleName": "Focusable element has no keyboard trap via standard navigation",
+    "description": "This rule checks if it is possible to use standard keyboard navigation to navigate through all content on a web page without becoming trapped in any element.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/a1b64e/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "e086e5",
+    "ruleName": "Form field has non-empty accessible name",
+    "description": "This rule checks that each form field element has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/e086e5/",
+    "successCriteria": [
+      "info-and-relationships",
+      "label-in-name",
+      "name-role-value"
+    ],
+    "status": "approved"
+  },
+  {
+    "ruleId": "cc0f0a",
+    "ruleName": "Form field label is descriptive",
+    "description": "This rule checks that labels describe the purpose of form field elements.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/cc0f0a/proposed/",
+    "successCriteria": ["headings-and-labels"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "a25f45",
+    "ruleName": "Headers attribute specified on a cell refers to cells in the same table element",
+    "description": "This rule checks that the `headers` attribute on a cell refer to other cells in the same `table` element.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/a25f45/",
+    "successCriteria": ["info-and-relationships"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "ffd0e9",
+    "ruleName": "Heading has non-empty accessible name",
+    "description": "This rule checks that each heading has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ffd0e9/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "b49b2e",
+    "ruleName": "Heading is descriptive",
+    "description": "This rule checks that headings describe the topic or purpose of the content.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/b49b2e/proposed/",
+    "successCriteria": ["headings-and-labels"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "off6ek",
+    "ruleName": "HTML element language subtag matches language",
+    "description": "This rule checks that the primary language subtag of an element matches its default language",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/off6ek/proposed/",
+    "successCriteria": ["language-of-parts"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "0va7u6",
+    "ruleName": "HTML images contain no text",
+    "description": "This rule checks that images of text are not used",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/0va7u6/",
+    "successCriteria": ["images-of-text", "images-of-text-no-exception"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "b5c3f8",
+    "ruleName": "HTML page has lang attribute",
+    "description": "This rule checks that an HTML page has a non-empty `lang` attribute.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/b5c3f8/",
+    "successCriteria": ["language-of-page"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "2779a5",
+    "ruleName": "HTML page has non-empty title",
+    "description": "This rule checks that a non-embedded HTML page has a non-empty title.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/2779a5/",
+    "successCriteria": ["page-titled"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "5b7ae0",
+    "ruleName": "HTML page lang and xml:lang attributes have matching values",
+    "description": "This rule checks that both `lang` and `xml:lang` attributes on the root element of a non-embedded HTML page, have the same primary language subtag.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/5b7ae0/proposed/",
+    "successCriteria": ["language-of-page"],
+    "status": "deprecated"
+  },
+  {
+    "ruleId": "bf051a",
+    "ruleName": "HTML page lang attribute has valid language tag",
+    "description": "This rule checks that the `lang` attribute of the root element of a non-embedded HTML page has a language tag with a known primary language subtag.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/bf051a/",
+    "successCriteria": ["language-of-page"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "ucwvc8",
+    "ruleName": "HTML page language subtag matches default language",
+    "description": "This rule checks that the primary language subtag of the page language matches the default language of the page",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ucwvc8/proposed/",
+    "successCriteria": ["language-of-page"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "c4a8a4",
+    "ruleName": "HTML page title is descriptive",
+    "description": "This rule checks that the first title in an HTML web page describes the topic or purpose of that page.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/c4a8a4/",
+    "successCriteria": ["page-titled"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "3ea0c8",
+    "ruleName": "Id attribute value is unique",
+    "description": "This rule checks that all `id` attribute values on a single page are unique.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/3ea0c8/proposed/",
+    "successCriteria": ["parsing"],
+    "status": "deprecated"
+  },
+  {
+    "ruleId": "cae760",
+    "ruleName": "Iframe element has non-empty accessible name",
+    "description": "This rule checks that each `iframe` element has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/cae760/proposed/",
+    "successCriteria": ["name-role-value"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "4b1c6c",
+    "ruleName": "Iframe elements with identical accessible names have equivalent purpose",
+    "description": "This rule checks that `iframe` elements with identical accessible names embed the same resource or equivalent resources.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/4b1c6c/proposed/",
+    "successCriteria": ["name-role-value"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "akn7bn",
+    "ruleName": "Iframe with interactive elements is not excluded from tab-order",
+    "description": "This rule checks that `iframe` elements which contain keyboard focusable elements are not excluded from sequential focus navigation.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/akn7bn/",
+    "successCriteria": ["keyboard", "keyboard-no-exception"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "qt1vmo",
+    "ruleName": "Image accessible name is descriptive",
+    "description": "This rule checks that the accessible names of images serve an equivalent purpose to the image.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/qt1vmo/",
+    "successCriteria": ["non-text-content"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "59796f",
+    "ruleName": "Image button has non-empty accessible name",
+    "description": "This rule checks that each image button element has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/59796f/",
+    "successCriteria": ["name-role-value", "non-text-content"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "9eb3f6",
+    "ruleName": "Image filename is accessible name for image",
+    "description": "This rule checks that image elements that use their source filename as their accessible name do so without loss of information to the user.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/9eb3f6/proposed/",
+    "successCriteria": ["non-text-content"],
+    "status": "deprecated"
+  },
+  {
+    "ruleId": "23a2a8",
+    "ruleName": "Image has non-empty accessible name",
+    "description": "This rule checks that each image either has a non-empty accessible name or is marked up as decorative.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/23a2a8/",
+    "successCriteria": ["non-text-content"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "e88epe",
+    "ruleName": "Image not in the accessibility tree is decorative",
+    "description": "This rule checks that visible `img`, `svg` and `canvas` elements that are ignored by assistive technologies are decorative.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/e88epe/proposed/",
+    "successCriteria": ["non-text-content"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "24afc2",
+    "ruleName": "Important letter spacing in style attributes is wide enough",
+    "description": "This rule checks that the `style` attribute is not used to prevent adjusting `letter-spacing` by using `!important`, except if it's at least 0.12 times the font size.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/24afc2/",
+    "successCriteria": ["text-spacing"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "78fd32",
+    "ruleName": "Important line height in style attributes is wide enough",
+    "description": "This rule checks that the `style` attribute is not used to prevent adjusting `line-height` by using `!important`, except if it's at least 1.5 times the font size.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/78fd32/",
+    "successCriteria": ["text-spacing"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "9e45ec",
+    "ruleName": "Important word spacing in style attributes is wide enough",
+    "description": "This rule checks that the `style` attribute is not used to prevent adjusting `word-spacing` by using `!important`, except if it's at least `0.16` times the font size.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/9e45ec/",
+    "successCriteria": ["text-spacing"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "c487ae",
+    "ruleName": "Link has non-empty accessible name",
+    "description": "This rule checks that each link has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/c487ae/",
+    "successCriteria": [
+      "link-purpose-in-context",
+      "link-purpose-link-only",
+      "name-role-value",
+      "non-text-content"
+    ],
+    "status": "approved"
+  },
+  {
+    "ruleId": "5effbb",
+    "ruleName": "Link in context is descriptive",
+    "description": "This rule checks that the accessible name of a link together with its context describes its purpose.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/5effbb/proposed/",
+    "successCriteria": ["link-purpose-in-context", "link-purpose-link-only"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "aizyf1",
+    "ruleName": "Link is descriptive",
+    "description": "This rule checks that the accessible name of a link describes its purpose.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/aizyf1/proposed/",
+    "successCriteria": ["link-purpose-link-only"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "fd3a94",
+    "ruleName": "Links with identical accessible names and same context serve equivalent purpose",
+    "description": "This rule checks that links with identical accessible names in the same context resolve to the same or equivalent resources.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/fd3a94/proposed/",
+    "successCriteria": ["link-purpose-in-context", "link-purpose-link-only"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "b20e66",
+    "ruleName": "Links with identical accessible names have equivalent purpose",
+    "description": "This rule checks that links with identical accessible names resolve to the same resource or equivalent resources.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/b20e66/proposed/",
+    "successCriteria": ["link-purpose-link-only"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "m6b1q3",
+    "ruleName": "Menuitem has non-empty accessible name",
+    "description": "This rule checks that each element with a `menuitem` role has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/m6b1q3/",
+    "successCriteria": ["name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "bc659a",
+    "ruleName": "Meta element has no refresh delay",
+    "description": "This rule checks that the `meta` element is not used for delayed redirecting or refreshing.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/bc659a/",
+    "successCriteria": [
+      "change-on-request",
+      "interruptions",
+      "timing-adjustable"
+    ],
+    "status": "approved"
+  },
+  {
+    "ruleId": "bisz58",
+    "ruleName": "Meta element has no refresh delay (no exception)",
+    "description": "This rule checks that the `meta` element is not used for delayed redirecting or refreshing.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/bisz58/",
+    "successCriteria": [
+      "change-on-request",
+      "interruptions",
+      "timing-adjustable"
+    ],
+    "status": "approved"
+  },
+  {
+    "ruleId": "b4f0c3",
+    "ruleName": "Meta viewport allows for zoom",
+    "description": "This rule checks that the `meta` element retains the user agent ability to zoom.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/b4f0c3/",
+    "successCriteria": ["reflow", "resize-text"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "ffbc54",
+    "ruleName": "No keyboard shortcut uses only printable characters",
+    "description": "This rule checks that if keyboard shortcuts are implemented using only printable characters, then there is a mechanism to disable the shortcut, or to remap the shortcut to use one or more non-printable character keys, or the shortcut for a user interface component is only available when that component has focus.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ffbc54/proposed/",
+    "successCriteria": ["character-key-shortcuts"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "8fc3b6",
+    "ruleName": "Object element rendering non-text content has non-empty accessible name",
+    "description": "This rule checks that each `object` element rendering non-text content has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/8fc3b6/",
+    "successCriteria": ["non-text-content"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "b33eff",
+    "ruleName": "Orientation of the page is not restricted using CSS transforms",
+    "description": "This rule checks that page content is not restricted to either `landscape` or `portrait` orientation using CSS transforms.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/b33eff/",
+    "successCriteria": ["orientation"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "674b10",
+    "ruleName": "Role attribute has valid value",
+    "description": "This rule checks that each `role` attribute has a valid value.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/674b10/",
+    "successCriteria": ["info-and-relationships", "name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "0ssw9k",
+    "ruleName": "Scrollable content can be reached with sequential focus navigation",
+    "description": "This rule checks that scrollable elements or their descendants can be reached with sequential focus navigation so that they can be scrolled by keyboard",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/0ssw9k/",
+    "successCriteria": ["keyboard", "keyboard-no-exception"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "2t702h",
+    "ruleName": "Summary element has non-empty accessible name",
+    "description": "This rule checks that each `summary` element has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/2t702h/",
+    "successCriteria": ["name-role-value"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "7d6734",
+    "ruleName": "SVG element with explicit role has non-empty accessible name",
+    "description": "This rule checks that each SVG image element that is explicitly included in the accessibility tree has a non-empty accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/7d6734/",
+    "successCriteria": ["non-text-content"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "d0f69e",
+    "ruleName": "Table header cell has assigned cells",
+    "description": "This rule checks that each table header has assigned cells in a table element.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/d0f69e/proposed/",
+    "successCriteria": ["info-and-relationships"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "efbfc7",
+    "ruleName": "Text content that changes automatically can be paused, stopped or hidden",
+    "description": "This rule checks that for any text content that regularly changes automatically, there are instruments to pause, stop, or hide it or to control its changing frequency.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/efbfc7/proposed/",
+    "successCriteria": ["pause-stop-hide"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "09o5cg",
+    "ruleName": "Text has enhanced contrast",
+    "description": "This rule checks that the highest possible contrast of every text character with its background meets the enhanced contrast requirement.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/09o5cg/",
+    "successCriteria": ["contrast-enhanced", "contrast-minimum"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "afw4f7",
+    "ruleName": "Text has minimum contrast",
+    "description": "This rule checks that the highest possible contrast of every text character with its background meets the minimal contrast requirement.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/afw4f7/",
+    "successCriteria": ["contrast-enhanced", "contrast-minimum"],
+    "status": "approved"
+  },
+  {
+    "ruleId": "eac66b",
+    "ruleName": "Video element auditory content has accessible alternative",
+    "description": "This rule checks that `video` elements have an alternative for information conveyed through audio.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/eac66b/proposed/",
+    "successCriteria": ["captions-prerecorded"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "f51b46",
+    "ruleName": "Video element auditory content has captions",
+    "description": "This rule checks that captions are available for audio information in non-streaming `video` elements.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/f51b46/proposed/",
+    "successCriteria": ["audio-only-and-video-only-prerecorded"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "ab4d13",
+    "ruleName": "Video element content is media alternative for text",
+    "description": "This rule checks non-streaming `video` is a media alternative for text on the page.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ab4d13/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "c5a4ea",
+    "ruleName": "Video element visual content has accessible alternative",
+    "description": "This rule checks that `video` elements with audio have an alternative for the video content as audio or as text.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/c5a4ea/proposed/",
+    "successCriteria": [
+      "audio-description-or-media-alternative-prerecorded",
+      "audio-description-prerecorded",
+      "media-alternative-prerecorded"
+    ],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "1ea59c",
+    "ruleName": "Video element visual content has audio description",
+    "description": "This rule checks that non-streaming `video` elements have all visual information also contained in the audio.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/1ea59c/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "f196ce",
+    "ruleName": "Video element visual content has description track",
+    "description": "This rule checks that description tracks that come with non-streaming `video` elements are descriptive.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/f196ce/proposed/",
+    "successCriteria": [],
+    "status": "deprecated"
+  },
+  {
+    "ruleId": "1ec09b",
+    "ruleName": "Video element visual content has strict accessible alternative",
+    "description": "This rule checks that `video` elements with audio have audio description.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/1ec09b/proposed/",
+    "successCriteria": ["audio-description-prerecorded"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "c3232f",
+    "ruleName": "Video element visual-only content has accessible alternative",
+    "description": "This rule checks that `video` elements without audio have an alternative available.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/c3232f/proposed/",
+    "successCriteria": ["audio-only-and-video-only-prerecorded"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "d7ba54",
+    "ruleName": "Video element visual-only content has audio track alternative",
+    "description": "Non-streaming `video` elements without audio must have an audio alternative.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/d7ba54/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "ac7dc6",
+    "ruleName": "Video element visual-only content has description track",
+    "description": "This rule checks that description tracks that come with non-streaming `video` elements, without audio, are descriptive.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ac7dc6/proposed/",
+    "successCriteria": [],
+    "status": "deprecated"
+  },
+  {
+    "ruleId": "ee13b5",
+    "ruleName": "Video element visual-only content has transcript",
+    "description": "Non-streaming `video` elements without audio must have all visual information available in a transcript.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/ee13b5/proposed/",
+    "successCriteria": [
+      "audio-only-and-video-only-prerecorded",
+      "info-and-relationships"
+    ],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "fd26cf",
+    "ruleName": "Video element visual-only content is media alternative for text",
+    "description": "This rule checks non-streaming silent `video` is a media alternative for text on the page.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/fd26cf/proposed/",
+    "successCriteria": [],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "2ee8b8",
+    "ruleName": "Visible label is part of accessible name",
+    "description": "This rule checks that interactive elements labeled through content have their visible label as part of their accessible name.",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/2ee8b8/proposed/",
+    "successCriteria": ["label-in-name"],
+    "status": "proposed"
+  },
+  {
+    "ruleId": "59br37",
+    "ruleName": "Zoomed text node is not clipped with CSS overflow",
+    "description": "This rule checks that text nodes are not unintentionally clipped by overflow, when a page is zoomed to 200% on 1280 by 1024 viewport;",
+    "rulePage": "https://www.w3.org/WAI/standards-guidelines/act/rules/59br37/proposed/",
+    "successCriteria": ["resize-text"],
+    "status": "proposed"
+  }
+]
