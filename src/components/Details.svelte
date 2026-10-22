@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { SuccessCriteria } from "../wcag";
   import { Badge } from "$lib/components/ui/badge";
+  import type { SuccessCriteria } from "../wcag";
 
   export let criterion: SuccessCriteria;
 
@@ -46,6 +46,29 @@
     {/if}
   </div>
 
+  <section aria-labelledby="references-heading" class="space-y-3">
+    <h2 id="references-heading" class="font-bold">References</h2>
+    <ul class="list-outside list-disc space-y-2 pl-5">
+      <li>
+        <a
+          href={criterion.url}
+          class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >WCAG 2.2 specification</a
+        >
+      </li>
+      {#each criterion.references ?? [] as reference}
+        <li>
+          <a
+            href={reference.url}
+            class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
+            {reference.title.replace(/[\d.]+/g, "").trim()}
+          </a>
+        </li>
+      {/each}
+    </ul>
+  </section>
+
   {#if criterion.axeCoreRules?.length}
     <section aria-labelledby="axe-rules-heading">
       <h2 id="axe-rules-heading" class="mb-3 font-bold">
@@ -69,27 +92,4 @@
       </ul>
     </section>
   {/if}
-
-  <section aria-labelledby="references-heading" class="space-y-3">
-    <h2 id="references-heading" class="font-bold">References</h2>
-    <ul class="list-outside list-disc space-y-2 pl-5">
-      <li>
-        <a
-          href={criterion.url}
-          class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
-          >WCAG 2.2 specification</a
-        >
-      </li>
-      {#each criterion.references ?? [] as reference}
-        <li>
-          <a
-            href={reference.url}
-            class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
-          >
-            {reference.title.replace(/[\d.]+/g, "").trim()}
-          </a>
-        </li>
-      {/each}
-    </ul>
-  </section>
 </article>
