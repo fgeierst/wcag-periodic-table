@@ -1,18 +1,65 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { derived } from "svelte/store";
   import Filter from "./Filter.svelte";
   import Card from "./Card.svelte";
   import Status from "./Status.svelte";
-  import { criteria, selectedCriteria, criteriaLoadState } from "../stores.ts";
+  import {
+    criteria,
+    selectedCriteria,
+    criteriaLoadState,
+    options,
+    searchQuery,
+  } from "../stores.ts";
+  import { SortKey } from "../utils/sorting.ts";
   import { flip } from "svelte/animate";
   import { quadInOut } from "svelte/easing";
 
   let reducedMotion = false;
 
-  onMount(async function () {
+  onMount(function () {
+    const storageKey = "wcag-table-state";
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(storageKey) ?? "null");
+      if (
+        saved &&
+        typeof saved.query === "string" &&
+        Array.isArray(saved.selectedLevels) &&
+        saved.selectedLevels.every((level: unknown) =>
+          ["A", "AA", "AAA"].includes(String(level)),
+        ) &&
+        Object.values(SortKey).includes(saved.sortKey)
+      ) {
+        $options = {
+          selectedLevels: saved.selectedLevels,
+          sortKey: saved.sortKey,
+        };
+        $searchQuery = saved.query;
+      }
+    } catch {
+      // Storage may be unavailable or contain stale data; use the defaults.
+    }
+    const unsubscribe = derived(
+      [options, searchQuery],
+      ([$options, query]) => ({
+        ...$options,
+        query,
+      }),
+    ).subscribe((state) => {
+      try {
+        sessionStorage.setItem(storageKey, JSON.stringify(state));
+      } catch {
+        // Browsing and search still work when storage is unavailable.
+      }
+    });
     reducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
+    void loadCriteria();
+    return unsubscribe;
+  });
+
+  async function loadCriteria() {
     try {
       const response = await fetch("/api/wcag.json");
       if (!response.ok) throw new Error("Unable to load criteria");
@@ -21,7 +68,7 @@
     } catch {
       $criteriaLoadState = "error";
     }
-  });
+  }
 </script>
 
 <header>

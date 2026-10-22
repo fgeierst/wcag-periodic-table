@@ -193,3 +193,41 @@ test("detail pages have no detectable WCAG A/AA accessibility violations", async
 test("unknown criterion IDs return 404", async ({ request }) => {
   expect((await request.get("/criteria/9.9.9/")).status()).toBe(404);
 });
+
+for (const returnMethod of ["back link", "browser Back"] as const) {
+  test(`returning via ${returnMethod} preserves the table search, filters, and sort`, async ({
+    page,
+  }) => {
+    await page.goto("/");
+    await expect(
+      page.getByRole("button", { name: "Search", exact: true }),
+    ).toBeEnabled();
+    await page.getByLabel("AAA", { exact: true }).check();
+    await page.getByLabel("AA", { exact: true }).uncheck();
+    await page.getByRole("searchbox").fill("keyboard");
+    await page.getByRole("searchbox").press("Enter");
+    await page
+      .getByRole("combobox", { name: "Sort by" })
+      .selectOption("Most common issues");
+    const items = page.getByRole("main").getByRole("listitem");
+    await expect(items).toHaveCount(6);
+    const before = await items.allTextContents();
+    await page
+      .getByRole("link", { name: "2.1.3 Keyboard (No Exception)", exact: true })
+      .click();
+    await expect(page).toHaveURL("/criteria/2.1.3/");
+    if (returnMethod === "back link") {
+      await page.getByRole("link", { name: "Back to criteria" }).click();
+    } else {
+      await page.goBack();
+    }
+    await expect(page.getByRole("searchbox")).toHaveValue("keyboard");
+    await expect(page.getByLabel("AAA", { exact: true })).toBeChecked();
+    await expect(page.getByLabel("AA", { exact: true })).not.toBeChecked();
+    await expect(page.getByRole("combobox", { name: "Sort by" })).toHaveValue(
+      "Most common issues",
+    );
+    await expect(items).toHaveCount(6);
+    expect(await items.allTextContents()).toEqual(before);
+  });
+}

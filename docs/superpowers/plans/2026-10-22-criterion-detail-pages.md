@@ -54,8 +54,8 @@
 - [x] Add static route and convert Details to full-page content; change Card to a native link with visible keyboard focus.
 - [x] Update obsolete dialog assertion and README.
 - [x] Run Vitest, full Playwright, lint, Astro check/static build, and formatting checks; verify generated route count and inspect desktop/mobile screenshots.
-- [ ] Review the complete diff, resolve any findings, and rerun affected checks.
-- [ ] Commit the implementation on the worktree branch, leaving it unmerged and unpushed.
+- [x] Review the complete diff, resolve any findings, and rerun affected checks.
+- [x] Commit the implementation on the worktree branch, leaving it unmerged and unpushed.
 
 ## Baseline and execution notes
 
@@ -63,3 +63,5 @@
 - Astro CLI-managed build/dev stalled in this harness. Programmatic `build({})` and `dev({server:{host:"127.0.0.1",port:4326}})` completed normally; no repository workaround is needed.
 - Planning self-review: requirements map to Task 1; all five review conditions have tests; data and route interfaces use existing `SuccessCriteria` consistently.
 - Verification: 26 Vitest tests, 22 Playwright tests against both dev and production preview, lint, Astro check (zero diagnostics), formatting, and build (88 pages) passed. Generated JSON is identical to the saved baseline; all 87 detail files exist. Desktop and 320px screenshots inspected.
+- Independent review found a table-context regression on returning from detail pages. Added two RED→GREEN round-trip tests and restored submitted query, selected levels, and sorting via validated tab-scoped session storage in `src/components/App.svelte`; synchronized `src/components/Search.svelte` with the restored query. The suite now has 24 Playwright tests. Storage failure falls back to ordinary non-persistent browsing.
+- Existing omissions of criterion notes, sorting comparator defects, and JavaScript-dependent table loading remain unchanged and outside issue #6.

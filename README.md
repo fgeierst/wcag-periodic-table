@@ -6,6 +6,8 @@ Select a criterion to open its full detail page, including its description,
 exceptions, related axe-core rules, and reference links. Each criterion has a
 shareable URL such as `/criteria/1.1.1/` that works on direct visits and reloads,
 even without JavaScript. Use **Back to criteria** to return to the table.
+Search, level filters, and sorting are retained within the current browser tab
+when returning from a detail page, where session storage is available.
 
 ## Search criteria
 

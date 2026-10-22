@@ -33,6 +33,7 @@
     id="criteria-search"
     type="search"
     name="query"
+    value={$searchQuery}
     class="w-64 min-w-0 rounded border border-gray-500 bg-transparent px-2 py-1 focus-visible:outline-2 focus-visible:outline-offset-2"
   />
   <button
