@@ -101,6 +101,36 @@
       </ul>
     </section>
   {/if}
+
+  {#if criterion.actRules?.length}
+    <section aria-labelledby="act-rules-heading">
+      <h2 id="act-rules-heading" class="mb-3 font-bold">
+        {#if criterion.actRules.length > 1}
+          ACT Rules ({criterion.actRules.length})
+        {:else}
+          ACT Rule
+        {/if}
+      </h2>
+      <ul class="list-outside list-disc space-y-2 pl-5">
+        {#each criterion.actRules as rule}
+          <li>
+            <a
+              href={rule.rulePage}
+              class="text-gray-600 underline focus-visible:outline-2 focus-visible:outline-offset-2"
+              >{rule.ruleId}</a
+            >
+            <span>{rule.ruleName}</span>
+            {#if rule.status !== "approved"}
+              <span class="text-gray-600">
+                ({rule.status === "proposed" ? "Proposed" : "Deprecated"})
+              </span>
+            {/if}
+            <p>{rule.description}</p>
+          </li>
+        {/each}
+      </ul>
+    </section>
+  {/if}
 </article>
 
 <style>
