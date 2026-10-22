@@ -1,12 +1,13 @@
+---
+interface Props {
+  showHome?: boolean;
+}
+
+const { showHome = false } = Astro.props;
+---
+
 <footer class="mt-8 space-y-2">
   <p>
-    <a
-      class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
-      href="/"
-    >
-      Home
-    </a>
-    {" · "}
     Made with{" "}
     <svg
       class="inline align-baseline"
@@ -69,6 +70,17 @@
     <a class="underline" href="https://florian.geierstanger.org/kontakt/">
       Contact
     </a>
+    {showHome && (
+      <>
+        {" · "}
+        <a
+          class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
+          href="/"
+        >
+          Home
+        </a>
+      </>
+    )}
   </p>
   <details>
     <summary>Sources</summary>

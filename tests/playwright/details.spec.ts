@@ -259,24 +259,34 @@ test("unknown criterion IDs return 404", async ({ request }) => {
   expect((await request.get("/criteria/9.9.9/")).status()).toBe(404);
 });
 
-test("detail pages share the index footer and its Home link", async ({
+test("shared footer shows Home last and only on detail pages", async ({
   page,
 }) => {
   await page.goto("/");
   const footer = page.getByRole("contentinfo");
   await expect(
     footer.getByRole("link", { name: "Home", exact: true }),
-  ).toHaveAttribute("href", "/");
+  ).toHaveCount(0);
   await expect(
     footer.getByRole("link", { name: "GitHub", exact: true }),
   ).toBeVisible();
   await expect(
     footer.getByRole("link", { name: "Contact", exact: true }),
   ).toBeVisible();
-  const indexFooter = await footer.textContent();
+  await expect(footer.locator("p").getByRole("link")).toHaveText([
+    "GitHub",
+    "Contact",
+  ]);
   await page.goto("/criteria/non-text-content/");
   await expect(footer).toHaveCount(1);
-  expect(await footer.textContent()).toBe(indexFooter);
+  await expect(footer.locator("p").getByRole("link")).toHaveText([
+    "GitHub",
+    "Contact",
+    "Home",
+  ]);
+  await expect(
+    footer.getByRole("link", { name: "Home", exact: true }),
+  ).toHaveAttribute("href", "/");
   await expect(
     footer.getByRole("link", { name: "GitHub", exact: true }),
   ).toHaveAttribute("href", "https://github.com/fgeierst/wcag-periodic-table");
