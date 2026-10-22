@@ -4,6 +4,7 @@ import type { SuccessCriteria } from "../../wcag";
 import { getCriteria } from "../../data/criteria";
 import { criterionPath } from "../../utils/criterion-url";
 import Details from "../../components/Details.svelte";
+import Footer from "../../components/Footer.astro";
 import Layout from "../../layouts/Layout.astro";
 
 export const getStaticPaths = (() =>
@@ -23,4 +24,5 @@ const { criterion } = Astro.props;
   <main class="max-w-[80ch]">
     <Details {criterion} />
   </main>
+  <Footer />
 </Layout>

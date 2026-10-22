@@ -141,6 +141,23 @@ test("detail pages preserve exceptions, statistics, rules, and references", asyn
     "href",
     "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html",
   );
+  const references = page.getByRole("region", {
+    name: "References",
+    exact: true,
+  });
+  await expect(references.getByRole("list")).toHaveCount(1);
+  await expect(references.getByRole("listitem")).toHaveText([
+    "WCAG 2.2 specification",
+    "How to Meet",
+    "Understanding",
+  ]);
+  for (const link of await references.getByRole("link").all()) {
+    expect(
+      await link.evaluate(
+        (element) => getComputedStyle(element).textDecorationLine,
+      ),
+    ).toContain("underline");
+  }
 });
 
 test("criteria without rules or exceptions omit empty sections", async ({
@@ -152,7 +169,11 @@ test("criteria without rules or exceptions omit empty sections", async ({
   );
   await expect(page.getByRole("heading", { name: /axe-core/ })).toHaveCount(0);
   await page.goto("/criteria/keyboard-no-exception/");
-  await expect(page.getByRole("main").getByRole("listitem")).toHaveCount(1);
+  await expect(
+    page
+      .getByRole("region", { name: "axe-core Rule", exact: true })
+      .getByRole("listitem"),
+  ).toHaveCount(1);
 });
 
 test("all criterion links including AAA resolve to the corresponding static page", async ({
@@ -236,6 +257,36 @@ test("detail pages have no detectable WCAG A/AA accessibility violations", async
 
 test("unknown criterion IDs return 404", async ({ request }) => {
   expect((await request.get("/criteria/9.9.9/")).status()).toBe(404);
+});
+
+test("detail pages share the index footer and its Home link", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const footer = page.getByRole("contentinfo");
+  await expect(
+    footer.getByRole("link", { name: "Home", exact: true }),
+  ).toHaveAttribute("href", "/");
+  await expect(
+    footer.getByRole("link", { name: "GitHub", exact: true }),
+  ).toBeVisible();
+  await expect(
+    footer.getByRole("link", { name: "Contact", exact: true }),
+  ).toBeVisible();
+  const indexFooter = await footer.textContent();
+  await page.goto("/criteria/non-text-content/");
+  await expect(footer).toHaveCount(1);
+  expect(await footer.textContent()).toBe(indexFooter);
+  await expect(
+    footer.getByRole("link", { name: "GitHub", exact: true }),
+  ).toHaveAttribute("href", "https://github.com/fgeierst/wcag-periodic-table");
+  await expect(
+    footer.getByRole("link", { name: "Contact", exact: true }),
+  ).toHaveAttribute("href", "https://florian.geierstanger.org/kontakt/");
+  await footer.getByText("Sources", { exact: true }).click();
+  await expect(footer.getByRole("listitem")).toHaveCount(3);
+  await footer.getByRole("link", { name: "Home", exact: true }).click();
+  await expect(page).toHaveURL("/");
 });
 
 for (const returnMethod of ["back link", "browser Back"] as const) {

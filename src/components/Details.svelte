@@ -3,7 +3,6 @@
   import { Badge } from "$lib/components/ui/badge";
 
   export let criterion: SuccessCriteria;
-  import { Button } from "$lib/components/ui/button";
 
   $: roundedPercentage = Math.floor(criterion.percentageOfTotalIssues ?? 0);
 </script>
@@ -73,19 +72,24 @@
 
   <section aria-labelledby="references-heading" class="space-y-3">
     <h2 id="references-heading" class="font-bold">References</h2>
-    <a
-      href={criterion.url}
-      class="inline-block underline focus-visible:outline-2 focus-visible:outline-offset-2"
-      >WCAG 2.2 specification</a
-    >
-    {#if criterion.references?.length}
-      <div class="flex flex-wrap gap-2">
-        {#each criterion.references as reference}
-          <Button variant="outline" href={reference.url}>
+    <ul class="list-outside list-disc space-y-2 pl-5">
+      <li>
+        <a
+          href={criterion.url}
+          class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >WCAG 2.2 specification</a
+        >
+      </li>
+      {#each criterion.references ?? [] as reference}
+        <li>
+          <a
+            href={reference.url}
+            class="underline focus-visible:outline-2 focus-visible:outline-offset-2"
+          >
             {reference.title.replace(/[\d.]+/g, "").trim()}
-          </Button>
-        {/each}
-      </div>
-    {/if}
+          </a>
+        </li>
+      {/each}
+    </ul>
   </section>
 </article>
