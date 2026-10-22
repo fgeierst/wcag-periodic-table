@@ -259,45 +259,34 @@ test("unknown criterion IDs return 404", async ({ request }) => {
   expect((await request.get("/criteria/9.9.9/")).status()).toBe(404);
 });
 
-test("shared footer shows Home last and only on detail pages", async ({
-  page,
-}) => {
-  await page.goto("/");
-  const footer = page.getByRole("contentinfo");
-  await expect(
-    footer.getByRole("link", { name: "Home", exact: true }),
-  ).toHaveCount(0);
-  await expect(
-    footer.getByRole("link", { name: "GitHub", exact: true }),
-  ).toBeVisible();
-  await expect(
-    footer.getByRole("link", { name: "Contact", exact: true }),
-  ).toBeVisible();
-  await expect(footer.locator("p").getByRole("link")).toHaveText([
-    "GitHub",
-    "Contact",
-  ]);
-  await page.goto("/criteria/non-text-content/");
-  await expect(footer).toHaveCount(1);
-  await expect(footer.locator("p").getByRole("link")).toHaveText([
-    "GitHub",
-    "Contact",
-    "Home",
-  ]);
-  await expect(
-    footer.getByRole("link", { name: "Home", exact: true }),
-  ).toHaveAttribute("href", "/");
-  await expect(
-    footer.getByRole("link", { name: "GitHub", exact: true }),
-  ).toHaveAttribute("href", "https://github.com/fgeierst/wcag-periodic-table");
-  await expect(
-    footer.getByRole("link", { name: "Contact", exact: true }),
-  ).toHaveAttribute("href", "https://florian.geierstanger.org/kontakt/");
-  await footer.getByText("Sources", { exact: true }).click();
-  await expect(footer.getByRole("listitem")).toHaveCount(3);
-  await footer.getByRole("link", { name: "Home", exact: true }).click();
-  await expect(page).toHaveURL("/");
-});
+for (const path of ["/", "/criteria/non-text-content/"]) {
+  test(`footer attribution is inside Sources without Home on ${path}`, async ({
+    page,
+  }) => {
+    await page.goto(path);
+    const footer = page.getByRole("contentinfo");
+    await expect(footer).toHaveCount(1);
+    await expect(footer.locator('a[href="/"]')).toHaveCount(0);
+    const attribution = footer.locator("p");
+    await expect(attribution).toContainText("Made with");
+    await expect(attribution).not.toBeVisible();
+    await footer.getByText("Sources", { exact: true }).click();
+    await expect(attribution).toBeVisible();
+    await expect(footer.getByRole("img", { name: "Pretzel" })).toBeVisible();
+    await expect(
+      footer.getByRole("link", { name: "GitHub", exact: true }),
+    ).toHaveAttribute(
+      "href",
+      "https://github.com/fgeierst/wcag-periodic-table",
+    );
+    await expect(
+      footer.getByRole("link", { name: "Contact", exact: true }),
+    ).toHaveAttribute("href", "https://florian.geierstanger.org/kontakt/");
+    await expect(footer.getByRole("listitem")).toHaveCount(3);
+    await footer.getByText("Sources", { exact: true }).click();
+    await expect(attribution).not.toBeVisible();
+  });
+}
 
 for (const returnMethod of ["back link", "browser Back"] as const) {
   test(`returning via ${returnMethod} preserves the table search, filters, and sort`, async ({
