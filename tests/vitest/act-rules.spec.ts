@@ -64,6 +64,7 @@ describe("ACT rule catalogue normalization", () => {
         }),
         rule({
           deprecated: true,
+          proposed: true,
           title: "Old rule",
           frontmatter: { id: "9eb3f6", description: "Deprecated rule." },
           permalink: "/standards-guidelines/act/rules/9eb3f6/proposed/",
@@ -114,6 +115,18 @@ describe("ACT rule catalogue normalization", () => {
     normalizeActRules(data);
     expect(data).toEqual(before);
   });
+
+  it.each([
+    rule({ permalink: "/standards-guidelines/act/rules/afw4f7/proposed/" }),
+    rule({ proposed: true }),
+  ])("rejects contradictory status and permalink metadata", (contradictory) => {
+    expect(() =>
+      normalizeActRules({ "act-rules": [contradictory, rule()] }),
+    ).toThrow(/Invalid ACT/);
+    expect(() =>
+      normalizeActRules({ "act-rules": [rule(), contradictory] }),
+    ).toThrow(/Invalid ACT/);
+  });
 });
 
 describe("ACT rule snapshot update", () => {
@@ -148,6 +161,10 @@ describe("ACT rule snapshot update", () => {
     ["HTTP error", async () => new Response("Unavailable", { status: 503 })],
     ["invalid JSON", async () => new Response("not json")],
     ["invalid catalogue", async () => Response.json({ testcases: [] })],
+    [
+      "contradictory status",
+      async () => Response.json({ "act-rules": [rule({ proposed: true })] }),
+    ],
   ])("preserves the existing snapshot after %s", async (_name, fetcher) => {
     await withSnapshot(async (path) => {
       await expect(

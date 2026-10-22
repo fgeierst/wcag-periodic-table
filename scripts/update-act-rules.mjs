@@ -30,10 +30,8 @@ export function normalizeActRules(data) {
         (slug) =>
           typeof slug === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug),
       ) ||
-      ![
-        `/standards-guidelines/act/rules/${id}/`,
-        `/standards-guidelines/act/rules/${id}/proposed/`,
-      ].includes(source.permalink)
+      source.permalink !==
+        `/standards-guidelines/act/rules/${id}/${source.proposed ? "proposed/" : ""}`
     ) {
       throw new Error(`Invalid ACT rule metadata: ${id ?? "unknown ID"}`);
     }
