@@ -117,11 +117,9 @@ test("submits keyword searches with button and Enter, not draft typing", async (
   await field.fill("keyboard drawing widgets");
   await field.press("Enter");
   await expect(cards).toHaveCount(1);
-  await cards.getByRole("button").click();
-  await expect(page.getByRole("dialog")).toContainText(
-    "All functionality is operable",
-  );
-  await page.keyboard.press("Escape");
+  await expect(
+    cards.getByRole("link", { name: "2.1.1 Keyboard", exact: true }),
+  ).toHaveAttribute("href", "/criteria/keyboard/");
   await expect(
     page.getByRole("button", { name: "Clear", exact: true }),
   ).toHaveCount(0);

@@ -2,6 +2,15 @@
 
 Displays the WCAG 2.2 success criteria as sortable sticky notes.
 
+Select a criterion to open its full detail page, including its description,
+exceptions, related axe-core rules, and reference links. Each criterion has a
+shareable URL such as `/criteria/non-text-content/` that works on direct visits
+and reloads, even without JavaScript. Select **WCAG 2.2** in the heading to return
+to the table. Detail pages share the table's left alignment and heading size,
+with text limited to 80ch.
+Search, level filters, and sorting are retained within the current browser tab
+when returning from a detail page, where session storage is available.
+
 ## Search criteria
 
 Use the search beside the filters to find criterion IDs, titles, descriptions,
